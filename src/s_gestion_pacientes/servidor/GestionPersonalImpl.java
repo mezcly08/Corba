@@ -6,20 +6,33 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import org.omg.CORBA.BooleanHolder;
 import org.omg.CosNaming.NamingContextExt;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalOperations;
-import s_gestion_pacientes.sop_corba.GestionPersonalPOA;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.DatosSesionDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
+
 import s_seguimiento_pacientes.sop_corba.GestionNotificaciones;
 import s_seguimiento_pacientes.sop_corba.GestionNotificacionesHelper;
 import s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.notificacionDTO;
 
 public class GestionPersonalImpl implements GestionPersonalOperations {
+
     // Atributos
-    private ArrayList<personalDTO> lstPersonal;
-    GestionNotificaciones ref;
+    private ArrayList<personalDTO> personal;
+    private ArrayList<PacienteDTO> paciente;
+    private ArrayList<ValorarPacienteDTO> valorarPaciente;
+    //private ArrayList<AdminCllbckInt> lstAdminCallback;
+    GestionNotificaciones objReferenciaRemota;
+    //private AdminCllbckInt objCllbck;
+    private ArrayList<DatosSesionDTO> listaDatosSesion;
+    private int contador = 0;
+
     // Atributos del administrador
     String admNombre = "Administrador";
     String admtTipoID = "CC";
@@ -27,12 +40,16 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     String admOcup = "Admin";
     String admUser = "Admin";
     String admPsw = "12345";
-    personalDTO admin = new personalDTO(admtTipoID, admID, admNombre, admOcup, admUser, admPsw);
+    personalDTO admin = new personalDTO(admtTipoID, admID, admNombre, admOcup, admUser, admUser, admNombre);
 
     public GestionPersonalImpl() {
-        lstPersonal = new ArrayList<personalDTO>();
-        ref = null;
-        lstPersonal.add(admin);
+        personal = new ArrayList<personalDTO>();
+        objReferenciaRemota = null;
+        personal.add(admin);
+        // this.lstAdminCallback = new ArrayList<AdminCllbckInt>();
+        this.paciente = new ArrayList<PacienteDTO>();
+        this.valorarPaciente = new ArrayList<ValorarPacienteDTO>();
+        this.listaDatosSesion = new ArrayList<DatosSesionDTO>();
     }
 
     @Override
@@ -40,19 +57,18 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         System.out.println("***En abrirSesion()...");
         boolean resultado = false;
         personalDTO varPersonal = null;
-        for (int i = 0; i < lstPersonal.size(); i++) {
-            if (objCredencial.usuario.equals(lstPersonal.get(i).usuario) &&
-                    objCredencial.clave.equals(lstPersonal.get(i).clave) &&
-                    objCredencial.id == lstPersonal.get(i).id) {
+        for (int i = 0; i < personal.size(); i++) {
+            if (objCredencial.usuario.equals(personal.get(i).usuario)
+                    && objCredencial.clave.equals(personal.get(i).clave)
+                    && objCredencial.id == personal.get(i).id) {
                 resultado = true;
-                varPersonal = lstPersonal.get(i);
+                varPersonal = personal.get(i);
                 break;
             }
         }
         if (varPersonal != null) {
             String nombreCompleto = varPersonal.nombreCompleto;
             String ocupacion = varPersonal.ocupacion;
-
             switch (ocupacion) {
                 case "Admin":
                     System.out.println("Admin ingreso al Sistema");
@@ -66,7 +82,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
                     notificacionDTO varNotificacion = new notificacionDTO();
                     varNotificacion.nombreCompleto = nombreCompleto;
                     varNotificacion.ocupacion = ocupacion;
-                    ref.enviarNotificacion(varNotificacion);
+                    objReferenciaRemota.enviarNotificacion(varNotificacion);
                     break;
                 case "Medico":
                     System.out.println("El Medico " + nombreCompleto + " ingreso al Sistema");
@@ -83,8 +99,8 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     public void registrarPersonal(personalDTO objPersonal, BooleanHolder res) {
         System.out.println("*** En registrarPersonal()...");
         res.value = false;
-        if (lstPersonal.size() < 3) {
-            if (lstPersonal.add(objPersonal)) {
+        if (personal.size() < 6) {
+            if (personal.add(objPersonal)) {
                 res.value = true;
                 System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
                         + " fue registrado con exito");
@@ -100,12 +116,12 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         boolean resultado = false;
         try {
             objPersonal.value = null;
-            if (!lstPersonal.isEmpty()) {
-                for (int i = 0; i < lstPersonal.size(); i++) {
-                    if (lstPersonal.get(i).id == id) {
-                        objPersonal.value = lstPersonal.get(i);
+            if (!personal.isEmpty()) {
+                for (int i = 0; i < personal.size(); i++) {
+                    if (personal.get(i).id == id) {
+                        objPersonal.value = personal.get(i);
                         resultado = true;
-                        System.out.println("*** Se encontró al usuario con id " + lstPersonal.get(i).id);
+                        System.out.println("*** Se encontró al usuario con id " + personal.get(i).id);
                         break;
                     }
                 }
@@ -118,14 +134,179 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         return resultado;
     }
 
+    public int buscarCredencial(credencialDTO objCredencial) {
+        int resultado = -1;
+
+        for (int i = 0; i < this.personal.size(); i++) {
+            if ((objCredencial.usuario.equals(personal.get(i).usuario)
+                    && (objCredencial.clave).equals(personal.get(i).clave))) {
+                resultado = i;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    public int buscarPacientes(int id) {
+        int resultado = -1;
+        for (int i = 0; i < this.paciente.size(); i++) {
+            if (this.paciente.get(i).id == id) {
+                resultado = i;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    public int buscarPersonal(int id) {
+        int resultado = -1;
+        for (int i = 0; i < this.personal.size(); i++) {
+            if (this.personal.get(i).id == id) {
+                resultado = i;
+                break;
+            }
+        }
+        return resultado;
+    }
+
     public void consultarReferenciaRemota(NamingContextExt nce, String servicio) {
         // GestionNotificaciones ref;
         try {
-            this.ref = GestionNotificacionesHelper.narrow(nce.resolve_str(servicio));
-            System.out.println("Obtenido el manejador sobre el servidor de objetos: " + ref);
+            this.objReferenciaRemota = GestionNotificacionesHelper.narrow(nce.resolve_str(servicio));
+            System.out.println("Obtenido el manejador sobre el servidor de objetos: " + objReferenciaRemota);
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public void registrarCallback(AdminCllbckint objCllbck) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean valorarPaciente(ValorarPacienteDTO objValorarPaciente) {
+        boolean bandera = false;
+        bandera = objReferenciaRemota.guardarValoracionPaciente(objValorarPaciente);
+        if (bandera == true) {
+            System.out.println("Valoracion ingresada con exito");
+            return true;
+        } else {
+            System.out.println("Error al ingresar la valoración");
+            return false;
+        }
+    }
+
+    @Override
+    public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean existenPacientes() {
+        if (paciente.size() == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void eliminarCallback(AdminCllbckint objAdmin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean guardarInfoSesion(InfoSesionDTO objInfoSesionDTO) {
+        boolean bandera = false;
+        bandera = objReferenciaRemota.guardarInfoSesion(objInfoSesionDTO);
+        if (bandera == true) {
+            System.out.println("La Informacion de la sesion fue ingresada con exito");
+            return true;
+        } else {
+            System.out.println("Error al ingresar la informacion de la sesion");
+            return false;
+        }
+    }
+
+    @Override
+    public InfoSesionDTO consultarInfoSesion(int id) {
+        return objReferenciaRemota.consultarInfoSesion(id);
+    }
+
+    @Override
+    public void validarValoracion(int id, String ocupacion) {
+        int med = 0, psi = 0, fisi = 0;
+        DatosSesionDTO datosSesion;
+
+        if (ocupacion.equals("Medico")) {
+            med++;
+            datosSesion = new DatosSesionDTO(id, med, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        } else if (ocupacion.equals("Psicologa")) {
+            psi++;
+            datosSesion = new DatosSesionDTO(id, psi, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        } else {
+            fisi++;
+            datosSesion = new DatosSesionDTO(id, fisi, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        }
+    }
+
+    @Override
+    public int contador(int id, String ocupacion) {
+        if (listaDatosSesion.size() == 0) {
+            return 0;
+        }
+        for (int i = 0; i < listaDatosSesion.size(); i++) {
+            if (listaDatosSesion.get(i).ocupacion.equals(ocupacion)) {
+                return listaDatosSesion.get(i).contValoracion;
+            }
+        }
+        return 0;
+    }
+
+    @Override
+    public boolean eliminarList(int id) {
+        int cont = 0;
+        for (int i = 0; i < listaDatosSesion.size(); i++) {
+            if (listaDatosSesion.get(i).idPacienteValorado == id) {
+                listaDatosSesion.remove(i);
+            }
+            cont++;
+        }
+        if (cont == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public PacienteDTO consultarPaciente(int id) {
+        PacienteDTO resultado = null;
+        System.out.println("Entrando a consultar paciente...");
+        int bandera = buscarPacientes(id);
+        if (bandera != -1) {
+            resultado = paciente.get(bandera);
+        }
+        return resultado;
+    }
+
+    @Override
+    public boolean registrarPaciente(PacienteDTO objPacientes) {
+        System.out.println("Entrando a registrar Paciente...");
+        boolean bandera = false;
+
+        bandera = paciente.add(objPacientes);
+
+        System.out.println("Paciente Registrado... ");
+        /* for (AdminCllbckInt objUsuario : lstAdminCallback) {
+            objUsuario.informarIngreso(objPacientes.getNombreCompleto(), objPacientes.getId());
+        }*/
+        return bandera;
     }
 
 }
