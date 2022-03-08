@@ -6,7 +6,6 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import org.omg.CORBA.BooleanHolder;
 import org.omg.CosNaming.NamingContextExt;
-import s_gestion_pacientes.sop_corba.AdminCllbckint;
 
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalOperations;
@@ -16,6 +15,7 @@ import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 
 import s_seguimiento_pacientes.sop_corba.GestionNotificaciones;
 import s_seguimiento_pacientes.sop_corba.GestionNotificacionesHelper;
@@ -27,9 +27,8 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     private ArrayList<personalDTO> personal;
     private ArrayList<PacienteDTO> paciente;
     private ArrayList<ValorarPacienteDTO> valorarPaciente;
-    //private ArrayList<AdminCllbckInt> lstAdminCallback;
+    private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
-    //private AdminCllbckInt objCllbck;
     private ArrayList<DatosSesionDTO> listaDatosSesion;
     private int contador = 0;
 
@@ -46,7 +45,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         personal = new ArrayList<personalDTO>();
         objReferenciaRemota = null;
         personal.add(admin);
-        // this.lstAdminCallback = new ArrayList<AdminCllbckInt>();
+        this.lstAdminCallback = new ArrayList<AdminCllbckint>();
         this.paciente = new ArrayList<PacienteDTO>();
         this.valorarPaciente = new ArrayList<ValorarPacienteDTO>();
         this.listaDatosSesion = new ArrayList<DatosSesionDTO>();
@@ -180,8 +179,9 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-    public void registrarCallback(AdminCllbckint objCllbck) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void registrarCallback(AdminCllbckint objAdmin) {
+        System.out.println("Invocando Registrar Callback");
+        lstAdminCallback.add(objAdmin);
     }
 
     @Override
@@ -212,7 +212,12 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public void eliminarCallback(AdminCllbckint objAdmin) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Invocando Eliminar Callback");
+        for (int i = 0; i < lstAdminCallback.size(); i++) {
+            if (lstAdminCallback.get(i).getClass().toString().equals(objAdmin.getClass().toString())) {
+                lstAdminCallback.remove(i);
+            }
+        }
     }
 
     @Override
