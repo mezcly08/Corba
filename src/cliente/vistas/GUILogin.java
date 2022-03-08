@@ -1,15 +1,10 @@
 package cliente.vistas;
 
-import cliente.utilidades.UtilidadesConsola;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
-
 
 public class GUILogin extends javax.swing.JFrame {
 
@@ -23,7 +18,7 @@ public class GUILogin extends javax.swing.JFrame {
         TextPrompt textUsuario = new TextPrompt(" Ingrese su usuario", jtUsuario);
         TextPrompt textContraseña = new TextPrompt(" Ingrese su contraseña", jtContrasena);
         TextPrompt textId = new TextPrompt(" Ingrese su identificación", jtIdentificacion);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -229,7 +224,7 @@ public class GUILogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-       System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
@@ -240,7 +235,7 @@ public class GUILogin extends javax.swing.JFrame {
     private void jPanel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        this.setLocation(x - xMouse,y - yMouse);
+        this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_jPanel5MouseDragged
 
     private void btnIngresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnIngresarMouseClicked
@@ -256,23 +251,27 @@ public class GUILogin extends javax.swing.JFrame {
                 personalDTOHolder objPersonal = new personalDTOHolder();
                 resultado = ref.consultarPersonal(id, objPersonal);
                 if (resultado == true && objPersonal != null) {
+                    personalDTO persona = new personalDTO();
+                    transformar(objPersonal, persona);
                     switch (objPersonal.value.ocupacion) {
                         case "Admin":
                             dispose();
-                            new GUIMenuAdmin(ref,"Administrador").setVisible(true);
+                            new GUIMenuAdmin(ref, "Administrador").setVisible(true);
                             break;
                         case "Recepcionista":
                             dispose();
-                            new GUIMenuRecepcionista(ref,varCredencial.usuario).setVisible(true);
+                            new GUIMenuRecepcionista(ref, varCredencial.usuario).setVisible(true);
                             break;
                         case "Psicologa":
-                            //MenuValoracion();
+                            dispose();
+                            new GUIMenuMedico(ref, persona).setVisible(true);
                             break;
                         case "Medico":
-                            //MenuValoracion();
+                            dispose();
+                            new GUIMenuMedico(ref, persona).setVisible(true);
                             break;
                         case "Fisioterapeuta":
-                            //MenuFisio();
+                            new GUIMenuMedico(ref, persona).setVisible(true);
                             break;
                         default:
                             break;
@@ -287,8 +286,17 @@ public class GUILogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnIngresarMouseClicked
 
+    private void transformar(personalDTOHolder objPersonal, personalDTO persona ) {
+        persona.clave = objPersonal.value.clave;
+        persona.fechaIngreso = objPersonal.value.fechaIngreso;
+        persona.id = objPersonal.value.id;
+        persona.nombreCompleto = objPersonal.value.nombreCompleto;
+        persona.ocupacion = objPersonal.value.ocupacion;
+        persona.tipo_id = objPersonal.value.tipo_id;
+        persona.usuario = objPersonal.value.usuario;
+    }
     private void jtIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtIdentificacionKeyTyped
-      char num = evt.getKeyChar();
+        char num = evt.getKeyChar();
         if (!Character.isDigit(num)) {
             evt.consume();
             lblFormatIde.setText("*Debes ingresar valores númericos");
@@ -296,7 +304,7 @@ public class GUILogin extends javax.swing.JFrame {
             lblFormatIde.setText("");
         }
     }//GEN-LAST:event_jtIdentificacionKeyTyped
-    
+
     private void LimpiarCampos() {
         this.jtUsuario.setText(null);
         this.jtContrasena.setText(null);

@@ -1,8 +1,6 @@
 package cliente.vistas;
 
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.JOptionPane;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
@@ -129,26 +127,24 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPacienteMouseClicked
-        //Hay que hacer el consul paciente que retorne un boolean    
+        //Hay que hacer el consul paciente que retorne un boolean
+        int id = Integer.parseInt(jtIdentificacion.getText());
         if (campoVacio() != true) {
             if (validarDatos()) {
                 JOptionPane.showMessageDialog(null, "Error de datos ingresados");
             } else {
-                boolean valor;
-                PacienteDTO objPacienteReg = ref.consultarPaciente(Integer.parseInt(jtIdentificacion.getText()));
-                if (objPacienteReg == null) {
+                if (ref.existenPacientes(id)) {
+                    JOptionPane.showMessageDialog(null, "El id " + jtIdentificacion.getText() + " Ya se encuentra en uso");     
+                } else {
                     PacienteDTO objPaciente = new PacienteDTO(jtNombreCompleto.getText(), Integer.parseInt(jtIdentificacion.getText()), jdcFechaIngreso.getDate().toString(),
                             jtOrdenEps.getText(), jtHistoriaClinica.getText());
-                    valor = ref.registrarPaciente(objPaciente);
+                    boolean valor = ref.registrarPaciente(objPaciente);
                     if (valor) {
-                        JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
+                        JOptionPane.showMessageDialog(null, "Paciente registrado exitosamente!");
                         limpiarCampos();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Personal no registrado");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "El id " + jtIdentificacion.getText() + " Ya se encuentra en uso");
-                    
+                        JOptionPane.showMessageDialog(null, "Paciente no registrado");
+                    } 
                 }
             }
         } else {

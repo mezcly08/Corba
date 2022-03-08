@@ -1,5 +1,6 @@
 package s_gestion_pacientes.servidor;
 
+import cliente.AdminCllbckImpl;
 import java.util.ArrayList;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -30,8 +31,9 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
     private ArrayList<DatosSesionDTO> listaDatosSesion;
-    private int contador = 0;
-
+    private int contador = 0;    
+    
+    
     // Atributos del administrador
     String admNombre = "Administrador";
     String admtTipoID = "CC";
@@ -199,7 +201,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return objReferenciaRemota.consultarValoracion(id, ocupacion);
     }
 
     @Override
@@ -328,6 +330,16 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
             }
         }
         return resultado;
+    }
+
+    @Override
+    public boolean existevaloracion(int id, String ocupacion) {
+        boolean objPaciente = false;
+        objPaciente = objReferenciaRemota.existevaloracion(id, ocupacion);
+        if(objPaciente){
+            return true;
+        }
+        return false;
     }
 
 }

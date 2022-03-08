@@ -155,7 +155,6 @@ public class GUIConsultarPaciente extends javax.swing.JPanel {
         int id = 0;
         if (!existenCamposVacios()) {
             try {
-                boolean resultado;
                 id = Integer.parseInt(jTextIdentificacion.getText());
 
                 if (ref.existenPacientes(id)) {
@@ -168,6 +167,7 @@ public class GUIConsultarPaciente extends javax.swing.JPanel {
                     jTextHistoriaPaciente.setText(objPaciente.hostoriaClinica);
                 } else {
                     JOptionPane.showMessageDialog(null, "Paciente NO encontrado");
+                    limpiarCampos();
                 }
             } catch (Exception e) {
                 System.out.println("La operacion no se pudo completar, intente nuevamente...");

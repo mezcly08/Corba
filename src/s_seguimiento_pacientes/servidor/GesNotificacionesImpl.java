@@ -49,7 +49,7 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
     public boolean guardarValoracionPaciente(s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO objValorarPaciente) {
         objArchivo = new Archivo("historialPacientes.txt");
         boolean bandera = false;
-        String cadena = objValorarPaciente.idPaciente+ "," + objValorarPaciente.concepto + ","
+        String cadena = objValorarPaciente.idPaciente + "," + objValorarPaciente.concepto + ","
                 + objValorarPaciente.obversaciones + "," + objValorarPaciente.fechaValoracion + "," + objValorarPaciente.Profesion + "," + objValorarPaciente.NombreProfesional;
         bandera = objArchivo.escribirLinea(cadena);
 
@@ -61,9 +61,33 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
             return false;
         }
     }
+    private ArrayList<ValorarPacienteDTO> armarOBJ(ArrayList<String> lstCadenas) {
+        ValorarPacienteDTO objValorarPaciente;
+        String[] cadena = null;
+        for (int i = 0; i < lstCadenas.size(); i++) {
+            cadena = lstCadenas.get(i).split(",");
+            objValorarPaciente = new ValorarPacienteDTO(cadena[0], cadena[1], cadena[2], cadena[3],
+                    cadena[4], cadena[5]);
+            lstValoraciones.add(objValorarPaciente);
+        }
+        return lstValoraciones;
+    }
+
+    private ArrayList<InfoSesionDTO> armarOBJSesiones(ArrayList<String> lstCadenas) {
+        InfoSesionDTO objInfoSesion;
+        String[] cadena = null;
+        for (int i = 0; i < lstCadenas.size(); i++) {
+            cadena = lstCadenas.get(i).split(",");
+            objInfoSesion = new InfoSesionDTO(Integer.parseInt(cadena[0]), Integer.parseInt(cadena[1]), cadena[2],
+                    Integer.parseInt(cadena[3]), Integer.parseInt(cadena[4]), Integer.parseInt(cadena[5]),
+                    Integer.parseInt(cadena[6]), Integer.parseInt(cadena[7]), cadena[8], cadena[9]);
+            lstSesiones.add(objInfoSesion);
+        }
+        return lstSesiones;
+    }
 
     @Override
-    public s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO consultarInfoSesion(int id) {
+    public InfoSesionDTO consultarInfoSesion(int id) {
         new Archivo("listadoSesionesPaciente_" + id + ".txt");
         ArrayList<InfoSesionDTO> lstInfoSesion = new ArrayList<InfoSesionDTO>();
         ArrayList<String> lineas = new ArrayList<String>();
@@ -86,9 +110,10 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
             return null;
         }
     }
-    
+
+    @Override
     public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
-        new Archivo("historialPacientes.txt");
+       new Archivo("historialPacientes.txt");
         ArrayList<ValorarPacienteDTO> lstValoracionesAux = new ArrayList<ValorarPacienteDTO>();
         ArrayList<String> lineas = new ArrayList<String>();
         try {
@@ -111,28 +136,29 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
         }
     }
 
-    private ArrayList<ValorarPacienteDTO> armarOBJ(ArrayList<String> lstCadenas) {
-        ValorarPacienteDTO objValorarPaciente;
-        String[] cadena = null;
-        for (int i = 0; i < lstCadenas.size(); i++) {
-            cadena = lstCadenas.get(i).split(",");
-            objValorarPaciente = new ValorarPacienteDTO(cadena[0], cadena[1], cadena[2], cadena[3],
-                    cadena[4], cadena[5]);
-            lstValoraciones.add(objValorarPaciente);
+    @Override
+    public boolean existevaloracion(int id, String ocupacion) {
+        new Archivo("historialPacientes.txt");
+        ArrayList<ValorarPacienteDTO> lstValoracionesAux = new ArrayList<ValorarPacienteDTO>();
+        ArrayList<String> lineas = new ArrayList<String>();
+        try {
+            lineas = objArchivo.leerLineasArchivo();
+
+            lstValoracionesAux = armarOBJ(lineas);
+            int valor = -1;
+            for (int i = 0; i < lstValoracionesAux.size(); i++) {
+                if ((lstValoracionesAux.get(i).idPaciente).equals(id) && lstValoracionesAux.get(i).Profesion.equals(ocupacion)) {
+                    valor = i;
+                }
+            }
+            if (valor != -1) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
         }
-        return lstValoraciones;
     }
-    
-    private ArrayList<InfoSesionDTO> armarOBJSesiones(ArrayList<String> lstCadenas) {
-        InfoSesionDTO objInfoSesion;
-        String[] cadena = null;
-        for (int i = 0; i < lstCadenas.size(); i++) {
-            cadena = lstCadenas.get(i).split(",");
-            objInfoSesion = new InfoSesionDTO(Integer.parseInt(cadena[0]), Integer.parseInt(cadena[1]), cadena[2],
-                    Integer.parseInt(cadena[3]), Integer.parseInt(cadena[4]), Integer.parseInt(cadena[5]),
-                    Integer.parseInt(cadena[6]), Integer.parseInt(cadena[7]), cadena[8], cadena[9]);
-            lstSesiones.add(objInfoSesion);
-        }
-        return lstSesiones;
-    }
+
 }

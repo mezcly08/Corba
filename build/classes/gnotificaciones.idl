@@ -26,8 +26,10 @@ module sop_corba{
 		};
 
         void enviarNotificacion(in notificacionDTO objNotificacion);
+		boolean existevaloracion(in long id, in string ocupacion);
         boolean guardarValoracionPaciente(in ValorarPacienteDTO objValorarPaciente);
         boolean guardarInfoSesion(in InfoSesionDTO objInfoSesion);
         InfoSesionDTO consultarInfoSesion(in long id);
+		ValorarPacienteDTO consultarValoracion(in string id, in string ocupacion);
     };
 };
