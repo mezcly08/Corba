@@ -5,10 +5,12 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.omg.CORBA.BooleanHolder;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 
 public class GUIRegistroPersonal extends javax.swing.JPanel {
-    
+
     private static GestionPersonal ref;
 
     public GUIRegistroPersonal(GestionPersonal ref) {
@@ -18,7 +20,7 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
         TextPrompt textId = new TextPrompt(" Ingrese la ID", jTextIdentificacion);
         TextPrompt textUsuario = new TextPrompt(" Ingrese el usuario", jTextUsuario);
         TextPrompt textClave = new TextPrompt(" Ingrese la clave", jTextClave);
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -183,35 +185,39 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPersonalMouseClicked
-//        if (!existenCamposVacios()) {
-//            if (validarDatos()) {
-//                JOptionPane.showMessageDialog(null, "Error de datos ingresados.");
-//            } else {                
+        if (!existenCamposVacios()) {
+            if (validarDatos()) {
+                JOptionPane.showMessageDialog(null, "Error de datos ingresados.");
+            } else {
 //                boolean valor;
-//                try {
-//                    PersonalDTO objPersonal = objRemoto.consultarPersonal(Integer.parseInt(jTextIdentificacion.getText()));
-//                    if (objPersonal == null) {
+                personalDTO objPersonal = new personalDTO(cbxTipoId.getSelectedItem().toString(), Integer.parseInt(jTextIdentificacion.getText()),
+                        jTextNombre.getText(), cbxOcupacion.getSelectedItem().toString(), jTextUsuario.getText(), jTextClave.getText());
+                //personalDTO objPersonalAux = ref.consultarPersonal(WIDTH, objPersonal);
+                BooleanHolder res = new BooleanHolder();
+                ref.registrarPersonal(objPersonal, res);
+                if (res.value == true) {
+                    System.out.println("***Personal Registrado Exitosamente***");
+                } else {
+                    System.out.println("ERROR: NO se pudo registrar el Personal");
+                }
+                if (res.value == true) {
 //                        PersonalDTO objUsuario = new PersonalDTO(cbxTipoId.getSelectedItem().toString(), Integer.parseInt(jTextIdentificacion.getText()),
 //                                jTextNombre.getText(), cbxOcupacion.getSelectedItem().toString(), jTextUsuario.getText(), jTextClave.getText(),jfechaIngreso.getDate().toString());
 //                        valor = objRemoto.registrarPersonal(objUsuario);
 //                        if (valor) {
-//                            JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
-//                            LimpiarCampos();
-//                        } else {
-//                            JOptionPane.showMessageDialog(null, "Personal no registrado");
-//                        }
+                    JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
+                    LimpiarCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Personal no registrado");
+                }
 //                    } else{
 //                        JOptionPane.showMessageDialog(null, "El id "+objPersonal.getId()+" ya se encuentra en uso");
 //                    }
-//
-//                } catch (RemoteException ex) {
-//                    Logger.getLogger(GUIRegistroPersonal.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios");
-//        }	
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios");
+        }
     }//GEN-LAST:event_btnRegistrarPersonalMouseClicked
 
     private void lblFormatIdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lblFormatIdeKeyTyped
@@ -225,7 +231,7 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblFormatIdeKeyTyped
 
     private void jTextIdentificacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextIdentificacionKeyTyped
-       char num = evt.getKeyChar();
+        char num = evt.getKeyChar();
         if (!Character.isDigit(num)) {
             evt.consume();
             lblFormatIde.setText("*Debes ingresar valores númericos");
@@ -233,7 +239,7 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
             lblFormatIde.setText("");
         }
     }//GEN-LAST:event_jTextIdentificacionKeyTyped
-    
+
     private boolean existenCamposVacios() {
 
         if (jTextNombre.getText().isEmpty() || jTextIdentificacion.getText().isEmpty() || jTextUsuario.getText().isEmpty() || jTextClave.getText().isEmpty() || jfechaIngreso.getDate() == null) {
@@ -241,7 +247,7 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
         }
         return false;
     }
-    
+
     private boolean validarDatos() {
         if (jTextNombre.getText().length() > 64 || Integer.parseInt(jTextIdentificacion.getText()) < 1 || jTextUsuario.getText().length() < 8 || jTextClave.getText().length() < 8) {
             return true;
