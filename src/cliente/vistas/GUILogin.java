@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;

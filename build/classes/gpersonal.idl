@@ -57,6 +57,7 @@ module sop_corba{
 
         void registrarPersonal(in personalDTO objPersonal, out boolean res);
         boolean consultarPersonal(in long id, out personalDTO objPersonal);
+		boolean consulPersonal(in long id);
 		PacienteDTO consultarPaciente(in long id);
 		boolean registrarPaciente(in PacienteDTO objPacientes);
         boolean abrirSesion(in credencialDTO objCredencial);

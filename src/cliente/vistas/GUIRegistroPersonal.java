@@ -6,12 +6,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.omg.CORBA.BooleanHolder;
+
+import org.omg.CORBA.*;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 
 public class GUIRegistroPersonal extends javax.swing.JPanel {
 
     private static GestionPersonal ref;
+    private static GestionPersonal ref2;
 
     public GUIRegistroPersonal(GestionPersonal ref) {
         this.ref = ref;
@@ -186,33 +190,24 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
 
     private void btnRegistrarPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPersonalMouseClicked
         if (!existenCamposVacios()) {
+            int id = Integer.parseInt(jTextIdentificacion.getText());
             if (validarDatos()) {
                 JOptionPane.showMessageDialog(null, "Error de datos ingresados.");
             } else {
-//                boolean valor;
-                personalDTO objPersonal = new personalDTO(cbxTipoId.getSelectedItem().toString(), Integer.parseInt(jTextIdentificacion.getText()),
-                        jTextNombre.getText(), cbxOcupacion.getSelectedItem().toString(), jTextUsuario.getText(), jTextClave.getText());
-                //personalDTO objPersonalAux = ref.consultarPersonal(WIDTH, objPersonal);
-                BooleanHolder res = new BooleanHolder();
-                ref.registrarPersonal(objPersonal, res);
-                if (res.value == true) {
-                    System.out.println("***Personal Registrado Exitosamente***");
+                if (ref.consulPersonal(id)) {
+                    JOptionPane.showMessageDialog(null, "El id " + jTextIdentificacion.getText() + " ya se encuentra en uso");
                 } else {
-                    System.out.println("ERROR: NO se pudo registrar el Personal");
+                    BooleanHolder res = new BooleanHolder();
+                    personalDTO objPersonalRegistrar = new personalDTO(cbxTipoId.getSelectedItem().toString(), Integer.parseInt(jTextIdentificacion.getText()),
+                            jTextNombre.getText(), cbxOcupacion.getSelectedItem().toString(), jTextUsuario.getText(), jTextClave.getText(), jfechaIngreso.getDate().toString());
+                    ref.registrarPersonal(objPersonalRegistrar, res);
+                    if (res.value == true) {
+                        JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
+                        LimpiarCampos();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Personal no registrado");
+                    }
                 }
-                if (res.value == true) {
-//                        PersonalDTO objUsuario = new PersonalDTO(cbxTipoId.getSelectedItem().toString(), Integer.parseInt(jTextIdentificacion.getText()),
-//                                jTextNombre.getText(), cbxOcupacion.getSelectedItem().toString(), jTextUsuario.getText(), jTextClave.getText(),jfechaIngreso.getDate().toString());
-//                        valor = objRemoto.registrarPersonal(objUsuario);
-//                        if (valor) {
-                    JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
-                    LimpiarCampos();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Personal no registrado");
-                }
-//                    } else{
-//                        JOptionPane.showMessageDialog(null, "El id "+objPersonal.getId()+" ya se encuentra en uso");
-//                    }
             }
 
         } else {

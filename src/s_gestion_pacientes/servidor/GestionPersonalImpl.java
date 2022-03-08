@@ -314,4 +314,16 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         return bandera;
     }
 
+    @Override
+    public boolean consulPersonal(int id) {
+        boolean resultado = false;
+        for (int i = 0; i < this.personal.size(); i++) {
+            if (this.personal.get(i).id == id) {
+                resultado = true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
 }
