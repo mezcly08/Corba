@@ -203,14 +203,6 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-    public boolean existenPacientes() {
-        if (paciente.size() == 0) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public void eliminarCallback(AdminCllbckint objAdmin) {
         System.out.println("Invocando Eliminar Callback");
         for (int i = 0; i < lstAdminCallback.size(); i++) {
@@ -319,6 +311,18 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         boolean resultado = false;
         for (int i = 0; i < this.personal.size(); i++) {
             if (this.personal.get(i).id == id) {
+                resultado = true;
+                break;
+            }
+        }
+        return resultado;
+    }
+
+    @Override
+    public boolean existenPacientes(int id) {
+        boolean resultado = false;
+        for (int i = 0; i < this.paciente.size(); i++) {
+            if (this.paciente.get(i).id == id) {
                 resultado = true;
                 break;
             }

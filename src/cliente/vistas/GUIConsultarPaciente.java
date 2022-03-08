@@ -1,4 +1,3 @@
-
 package cliente.vistas;
 
 import java.util.Date;
@@ -7,7 +6,7 @@ import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
 
 public class GUIConsultarPaciente extends javax.swing.JPanel {
-    
+
     private static GestionPersonal ref;
 
     public GUIConsultarPaciente(GestionPersonal ref) {
@@ -153,20 +152,22 @@ public class GUIConsultarPaciente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPacienteMouseClicked
-       String id = "";
+        int id = 0;
         if (!existenCamposVacios()) {
             try {
-                id = jTextIdentificacion.getText();
-                PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(id));
-                limpiarCampos();
-                if (objPaciente != null) {
+                boolean resultado;
+                id = Integer.parseInt(jTextIdentificacion.getText());
+
+                if (ref.existenPacientes(id)) {
+                    PacienteDTO objPaciente = ref.consultarPaciente(id);
+                    limpiarCampos();
                     jTextNomPaciente.setText(objPaciente.nombreCompleto);
                     jTextIdPaciente.setText(objPaciente.id + "");
                     jTextFechaIngresoPaciente.setText(objPaciente.fechaIngreso);
                     jTextOrdenPaciente.setText(objPaciente.ordenApoyo);
                     jTextHistoriaPaciente.setText(objPaciente.hostoriaClinica);
                 } else {
-                    System.out.println("Paciente NO encontrado");
+                    JOptionPane.showMessageDialog(null, "Paciente NO encontrado");
                 }
             } catch (Exception e) {
                 System.out.println("La operacion no se pudo completar, intente nuevamente...");
@@ -185,7 +186,7 @@ public class GUIConsultarPaciente extends javax.swing.JPanel {
             lblFormatIde.setText("");
         }
     }//GEN-LAST:event_jTextIdentificacionKeyTyped
-    
+
     private boolean existenCamposVacios() {
         if (jTextIdentificacion.getText().isEmpty()) {
             return true;
@@ -196,7 +197,7 @@ public class GUIConsultarPaciente extends javax.swing.JPanel {
     private void limpiarCampos() {
         this.jTextIdentificacion.setText(null);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnBuscarPaciente;
     private javax.swing.JLabel jLabel2;

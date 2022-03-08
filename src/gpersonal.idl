@@ -64,7 +64,7 @@ module sop_corba{
 		void registrarCallback(in AdminCllbckint objCllbck) ; 
 		boolean valorarPaciente(in ValorarPacienteDTO objValorarPaciente);
 		ValorarPacienteDTO consultarValoracion(in string id, in string ocupacion);
-		boolean existenPacientes();
+		boolean existenPacientes(in long id);
 		void eliminarCallback(in AdminCllbckint objAdmin);
 		boolean guardarInfoSesion(in InfoSesionDTO objInfoSesionDTO);
 		InfoSesionDTO consultarInfoSesion( in long id);
