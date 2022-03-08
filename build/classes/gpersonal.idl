@@ -1,22 +1,69 @@
 module sop_corba{
     interface GestionPersonal{
         struct personalDTO{
-            string tipo_id;
-            long id;
-            string nombreCompleto;
-            string ocupacion;
-            string usuario;
-            string clave;
+            String tipo_id; 
+			int id;
+			String nombreCompleto;
+			String ocupacion;
+			String pacientes;
+			String clave;
+			String fechaIngreso;
         };
 
         struct credencialDTO{
             string usuario;
             string clave;
-            long id;
+            int id;
         };
+		
+		struct DatosSesionDTO{
+			int idPacienteValorado;
+			int contValoracion;
+			String ocupacion;
+		};
+		
+		struct InfoSesionDTO{
+			int idPaciente;
+			int numFase;
+			String fechaSesion;
+			int numSesion;
+			int presionArterial;
+			int frecuenciaInicial;
+			int frecuenciaFinal;
+			int saturacionOxigeno;
+			String estadoPaciente;
+			String observaciones;
+		};
+		
+		struct PacienteDTO{
+			String nombreCompleto;
+			int id;
+			String fechaIngreso; 
+			String ordenApoyo;
+			String hostoriaClinica;
+		};
+		
+		struct ValorarPacienteDTO{
+			String idPaciente;
+			String concepto;
+			String obversaciones;
+			String fechaValoracion;
+			String Profesion;
+			String NombreProfesional;
+		};
 
         void registrarPersonal(in personalDTO objPersonal, out boolean res);
-        boolean consultarPersonal(in long id, out personalDTO objPersonal);
+        pacienteDTO consultarPersonal(in int id);
         boolean abrirSesion(in credencialDTO objCredencial);
+		void registrarCallback(in AdmCllbckInt objCllbck) ; //Pensar
+		boolean valorarPaciente(in ValorarPacienteDTO objValorarPaciente);
+		ValorarPacienteDTO consultarValoracion(in String id, in String ocupacion);
+		boolean existenPacientes();
+		void eliminarCallback(in AdminCllbckInt objAdmin);
+		boolean guardarInfoSesion(in InfoSesionDTO objInfoSesionDTO);
+		InfoSesionDTO consultarInfoSesion( in int id);
+        void validarValoracion(in int id, in String ocupacion);
+		int contador(int id, String ocupacion);
+		boolean eliminarList(in int id);
     };
 };
