@@ -4,9 +4,30 @@ module sop_corba{
             string nombreCompleto;
             string ocupacion;
         };
+        struct ValorarPacienteDTO{
+			string idPaciente;
+			string concepto;
+			string obversaciones;
+			string fechaValoracion;
+			string Profesion;
+			string NombreProfesional;
+		}; 
+        struct InfoSesionDTO{
+			long idPaciente;
+			long numFase;
+			string fechaSesion;
+			long numSesion;
+			long presionArterial;
+			long frecuenciaInicial;
+			long frecuenciaFinal;
+			long saturacionOxigeno;
+			string estadoPaciente;
+			string observaciones;
+		};
+
         void enviarNotificacion(in notificacionDTO objNotificacion);
-	boolean guardarValoracionPaciente(in ValorarPacienteDTO objValorarPaciente);
-	boolean guardarInfoSesion(in InfoSesionDTO objInfoSesion);
-	InfoSesionDTO consultarInfoSesion(in int id);
+        boolean guardarValoracionPaciente(in ValorarPacienteDTO objValorarPaciente);
+        boolean guardarInfoSesion(in InfoSesionDTO objInfoSesion);
+        InfoSesionDTO consultarInfoSesion(in long id);
     };
 };
