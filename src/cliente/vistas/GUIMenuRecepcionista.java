@@ -2,20 +2,18 @@
 package cliente.vistas;
 
 import java.awt.BorderLayout;
-
 import s_gestion_pacientes.sop_corba.GestionPersonal;
-public class GUIMenuAdmin extends javax.swing.JFrame {
+public class GUIMenuRecepcionista extends javax.swing.JFrame {
     
     private static GestionPersonal ref;
     private int IdPersonal;
     int xMouse, yMouse;
     
-    public GUIMenuAdmin(GestionPersonal ref, String nomAdmin) {
+    public GUIMenuRecepcionista(GestionPersonal ref, String nomUsuario) {
         this.ref = ref;
         initComponents();
         setLocationRelativeTo(null);
-        this.lblRecepcionista.setText("Bienvenido "+nomAdmin);
-        
+        lblRecepcionista.setText("Bienvenido "+ nomUsuario);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,11 +23,11 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPContenedor = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnRegistrarPersonal = new javax.swing.JLabel();
+        btnRegistrarPaciente = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         lblRecepcionista = new javax.swing.JLabel();
-        btnConsultarPersonal = new javax.swing.JLabel();
+        btnConsultarPaciente = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnSalir = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
@@ -43,7 +41,6 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 51, 68)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPContenedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -52,54 +49,54 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         jPContenedor.setLayout(jPContenedorLayout);
         jPContenedorLayout.setHorizontalGroup(
             jPContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
+            .addGap(0, 470, Short.MAX_VALUE)
         );
         jPContenedorLayout.setVerticalGroup(
             jPContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 500, 460));
+        jPanel1.add(jPContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, 470, 450));
 
         jPanel2.setBackground(new java.awt.Color(38, 51, 68));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegistrarPersonal.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegistrarPersonal.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnRegistrarPersonal.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/add_user_male_25px.png"))); // NOI18N
-        btnRegistrarPersonal.setText("Registrar Personal");
-        btnRegistrarPersonal.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnRegistrarPersonal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegistrarPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegistrarPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        btnRegistrarPaciente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnRegistrarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/add_user_male_25px.png"))); // NOI18N
+        btnRegistrarPaciente.setText("Registrar Paciente");
+        btnRegistrarPaciente.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        btnRegistrarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrarPersonalMouseClicked(evt);
+                btnRegistrarPacienteMouseClicked(evt);
             }
         });
-        jPanel2.add(btnRegistrarPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 194, -1));
+        jPanel2.add(btnRegistrarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 194, -1));
 
         jSeparator1.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator1.setForeground(new java.awt.Color(38, 51, 68));
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 214, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/businessman_50px.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
 
         lblRecepcionista.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
         lblRecepcionista.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(lblRecepcionista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 156, 22));
 
-        btnConsultarPersonal.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnConsultarPersonal.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarPersonal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/search_property_25px.png"))); // NOI18N
-        btnConsultarPersonal.setText("Consultar Personal");
-        btnConsultarPersonal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnConsultarPersonal.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnConsultarPaciente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
+        btnConsultarPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarPaciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/search_property_25px.png"))); // NOI18N
+        btnConsultarPaciente.setText("Consultar Paciente");
+        btnConsultarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnConsultarPersonalMouseClicked(evt);
+                btnConsultarPacienteMouseClicked(evt);
             }
         });
-        jPanel2.add(btnConsultarPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
+        jPanel2.add(btnConsultarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         jSeparator2.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator2.setForeground(new java.awt.Color(38, 51, 68));
@@ -171,42 +168,42 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 732, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegistrarPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPersonalMouseClicked
-        GUIRegistroPersonal jpRegistroUsuarios = new GUIRegistroPersonal(ref);
-        jpRegistroUsuarios.setSize(410, 467);
-        jpRegistroUsuarios.setLocation(5, 5);
+    private void btnRegistrarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPacienteMouseClicked
+        GUIRegistrarPaciente jpRegistrarPaciente = new GUIRegistrarPaciente(ref);
+        jpRegistrarPaciente.setSize(410, 467);
+        jpRegistrarPaciente.setLocation(5, 5);
 
         jPContenedor.removeAll();
-        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
+        jPContenedor.add(jpRegistrarPaciente, BorderLayout.CENTER);
         jPContenedor.revalidate();
         jPContenedor.repaint();
-    }//GEN-LAST:event_btnRegistrarPersonalMouseClicked
-
-    private void btnConsultarPersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarPersonalMouseClicked
-        GUIConsultarPersonal jpRegistroUsuarios = new GUIConsultarPersonal(ref);
-        jpRegistroUsuarios.setSize(410, 467);
-        jpRegistroUsuarios.setLocation(5, 5);
-
-        jPContenedor.removeAll();
-        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-        jPContenedor.revalidate();
-        jPContenedor.repaint();
-    }//GEN-LAST:event_btnConsultarPersonalMouseClicked
+    }//GEN-LAST:event_btnRegistrarPacienteMouseClicked
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         dispose();
         new GUILogin(ref).setVisible(true);
     }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnConsultarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarPacienteMouseClicked
+         GUIConsultarPaciente jpConsularPaciente = new GUIConsultarPaciente(ref);
+        jpConsularPaciente.setSize(420, 404);
+        jpConsularPaciente.setLocation(5, 5);
+
+        jPContenedor.removeAll();
+        jPContenedor.add(jpConsularPaciente, BorderLayout.CENTER);
+        jPContenedor.revalidate();
+        jPContenedor.repaint();
+    }//GEN-LAST:event_btnConsultarPacienteMouseClicked
 
     private void btnSalir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseClicked
         System.exit(0);
@@ -259,8 +256,8 @@ public class GUIMenuAdmin extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnConsultarPersonal;
-    private javax.swing.JLabel btnRegistrarPersonal;
+    private javax.swing.JLabel btnConsultarPaciente;
+    private javax.swing.JLabel btnRegistrarPaciente;
     private javax.swing.JLabel btnSalir;
     private javax.swing.JLabel btnSalir1;
     private javax.swing.JLabel jLabel2;

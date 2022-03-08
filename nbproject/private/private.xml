@@ -3,10 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/cliente/vistas/GUILogin.java</file>
-            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/cliente/vistas/GUIRegistroPersonal.java</file>
-            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/cliente/vistas/GUIRegistroCorba.java</file>
-            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/s_gestion_pacientes/servidor/GestionPersonalImpl.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIConsultarPaciente.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/sop_corba/GestionPersonalPackage/personalDTO.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIRegistrarPaciente.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/servidor/GestionPersonalImpl.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUILogin.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIConsultarPersonal.java</file>
+            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/ClienteDeObjetos.java</file>
         </group>
     </open-files>
 </project-private>

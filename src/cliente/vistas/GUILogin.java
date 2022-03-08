@@ -262,7 +262,8 @@ public class GUILogin extends javax.swing.JFrame {
                             new GUIMenuAdmin(ref,"Administrador").setVisible(true);
                             break;
                         case "Recepcionista":
-                            //MenuRecepcionista();
+                            dispose();
+                            new GUIMenuRecepcionista(ref,varCredencial.usuario).setVisible(true);
                             break;
                         case "Psicologa":
                             //MenuValoracion();

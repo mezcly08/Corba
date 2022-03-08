@@ -91,7 +91,7 @@ public class ClienteDeObjetos {
             if (login) {
                 boolean resultado;
                 personalDTOHolder objPersonal = new personalDTOHolder();
-                resultado = ref.consultarPersonal(id);
+                resultado = ref.consultarPersonal(id, objPersonal);
                 if (resultado == true && objPersonal != null) {
                     switch (objPersonal.value.ocupacion) {
                         case "Admin":
@@ -321,7 +321,7 @@ public class ClienteDeObjetos {
                 }
             } while (clave.length() < 8);
 
-            personalDTO objPersonal = new personalDTO(tipoID, id, nombre, ocupacion, usuario, clave);
+            personalDTO objPersonal = new personalDTO(tipoID, id, nombre, ocupacion, usuario, clave,"");
             BooleanHolder res = new BooleanHolder();
             ref.registrarPersonal(objPersonal, res);
             if (res.value == true) {

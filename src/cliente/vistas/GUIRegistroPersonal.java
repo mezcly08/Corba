@@ -15,7 +15,6 @@ import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 public class GUIRegistroPersonal extends javax.swing.JPanel {
 
     private static GestionPersonal ref;
-    private static GestionPersonal ref2;
 
     public GUIRegistroPersonal(GestionPersonal ref) {
         this.ref = ref;
