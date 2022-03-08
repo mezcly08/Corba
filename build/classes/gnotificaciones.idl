@@ -5,5 +5,8 @@ module sop_corba{
             string ocupacion;
         };
         void enviarNotificacion(in notificacionDTO objNotificacion);
+	boolean guardarValoracionPaciente(in ValorarPacienteDTO objValorarPaciente);
+	boolean guardarInfoSesion(in InfoSesionDTO objInfoSesion);
+	InfoSesionDTO consultarInfoSesion(in int id);
     };
 };
