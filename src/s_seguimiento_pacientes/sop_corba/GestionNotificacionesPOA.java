@@ -44,7 +44,7 @@ public abstract class GestionNotificacionesPOA extends org.omg.PortableServer.Se
 
        case 1:  // sop_corba/GestionNotificaciones/guardarValoracionPaciente
        {
-         s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.ValorarPacienteDTO objValorarPaciente = s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.ValorarPacienteDTOHelper.read (in);
+         s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO objValorarPaciente = s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTOHelper.read (in);
          boolean $result = false;
          $result = this.guardarValoracionPaciente (objValorarPaciente);
          out = $rh.createReply();
@@ -54,7 +54,7 @@ public abstract class GestionNotificacionesPOA extends org.omg.PortableServer.Se
 
        case 2:  // sop_corba/GestionNotificaciones/guardarInfoSesion
        {
-         s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO objInfoSesion = s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTOHelper.read (in);
+         s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO objInfoSesion = s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTOHelper.read (in);
          boolean $result = false;
          $result = this.guardarInfoSesion (objInfoSesion);
          out = $rh.createReply();
@@ -65,10 +65,10 @@ public abstract class GestionNotificacionesPOA extends org.omg.PortableServer.Se
        case 3:  // sop_corba/GestionNotificaciones/consultarInfoSesion
        {
          int id = in.read_long ();
-         s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO $result = null;
+         s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO $result = null;
          $result = this.consultarInfoSesion (id);
          out = $rh.createReply();
-         s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTOHelper.write (out, $result);
+         s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTOHelper.write (out, $result);
          break;
        }
 

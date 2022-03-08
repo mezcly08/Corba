@@ -39,17 +39,17 @@ public class GestionNotificacionesPOATie extends GestionNotificacionesPOA
     _impl.enviarNotificacion(objNotificacion);
   } // enviarNotificacion
 
-  public boolean guardarValoracionPaciente (s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.ValorarPacienteDTO objValorarPaciente)
+  public boolean guardarValoracionPaciente (s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO objValorarPaciente)
   {
     return _impl.guardarValoracionPaciente(objValorarPaciente);
   } // guardarValoracionPaciente
 
-  public boolean guardarInfoSesion (s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO objInfoSesion)
+  public boolean guardarInfoSesion (s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO objInfoSesion)
   {
     return _impl.guardarInfoSesion(objInfoSesion);
   } // guardarInfoSesion
 
-  public s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO consultarInfoSesion (int id)
+  public s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO consultarInfoSesion (int id)
   {
     return _impl.consultarInfoSesion(id);
   } // consultarInfoSesion

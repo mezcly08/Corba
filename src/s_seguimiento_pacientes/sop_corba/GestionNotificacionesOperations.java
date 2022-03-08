@@ -13,5 +13,5 @@ public interface GestionNotificacionesOperations
   void enviarNotificacion (s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.notificacionDTO objNotificacion);
   boolean guardarValoracionPaciente (s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO objValorarPaciente);
   boolean guardarInfoSesion (s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO objInfoSesion);
-  s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO consultarInfoSesion (int id);
+ s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO consultarInfoSesion (int id);
 } // interface GestionNotificacionesOperations

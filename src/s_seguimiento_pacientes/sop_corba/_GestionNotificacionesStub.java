@@ -1,5 +1,7 @@
 package s_seguimiento_pacientes.sop_corba;
 
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO;
+
 
 /**
 * s_seguimiento_pacientes/sop_corba/_GestionNotificacionesStub.java .
@@ -30,12 +32,12 @@ public class _GestionNotificacionesStub extends org.omg.CORBA.portable.ObjectImp
             }
   } // enviarNotificacion
 
-  public boolean guardarValoracionPaciente (s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.ValorarPacienteDTO objValorarPaciente)
+  public boolean guardarValoracionPaciente (s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO objValorarPaciente)
   {
             org.omg.CORBA.portable.InputStream $in = null;
             try {
                 org.omg.CORBA.portable.OutputStream $out = _request ("guardarValoracionPaciente", true);
-                s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.ValorarPacienteDTOHelper.write ($out, objValorarPaciente);
+                s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTOHelper.write ($out, objValorarPaciente);
                 $in = _invoke ($out);
                 boolean $result = $in.read_boolean ();
                 return $result;
@@ -50,12 +52,12 @@ public class _GestionNotificacionesStub extends org.omg.CORBA.portable.ObjectImp
             }
   } // guardarValoracionPaciente
 
-  public boolean guardarInfoSesion (s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO objInfoSesion)
+  public boolean guardarInfoSesion (s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO objInfoSesion)
   {
             org.omg.CORBA.portable.InputStream $in = null;
             try {
                 org.omg.CORBA.portable.OutputStream $out = _request ("guardarInfoSesion", true);
-                s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTOHelper.write ($out, objInfoSesion);
+               s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTOHelper.write ($out, objInfoSesion);
                 $in = _invoke ($out);
                 boolean $result = $in.read_boolean ();
                 return $result;
@@ -70,14 +72,14 @@ public class _GestionNotificacionesStub extends org.omg.CORBA.portable.ObjectImp
             }
   } // guardarInfoSesion
 
-  public s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO consultarInfoSesion (int id)
+  public s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO consultarInfoSesion (int id)
   {
             org.omg.CORBA.portable.InputStream $in = null;
             try {
                 org.omg.CORBA.portable.OutputStream $out = _request ("consultarInfoSesion", true);
                 $out.write_long (id);
                 $in = _invoke ($out);
-                s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTO $result = s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.InfoSesionDTOHelper.read ($in);
+                s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO $result = s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTOHelper.read ($in);
                 return $result;
             } catch (org.omg.CORBA.portable.ApplicationException $ex) {
                 $in = $ex.getInputStream ();
@@ -126,4 +128,6 @@ public class _GestionNotificacionesStub extends org.omg.CORBA.portable.ObjectImp
      orb.destroy() ;
    }
   }
+
+    
 } // class _GestionNotificacionesStub

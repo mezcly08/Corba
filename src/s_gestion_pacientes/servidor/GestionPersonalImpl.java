@@ -10,7 +10,6 @@ import s_gestion_pacientes.sop_corba.AdminCllbckint;
 
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalOperations;
-import s_gestion_pacientes.sop_corba.GestionPersonalPOA;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.DatosSesionDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
@@ -21,7 +20,6 @@ import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 import s_seguimiento_pacientes.sop_corba.GestionNotificaciones;
 import s_seguimiento_pacientes.sop_corba.GestionNotificacionesHelper;
 import s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.notificacionDTO;
-import s_seguimiento_pacientes.sop_corba.GestionNotificacionesPackage.*;
 
 public class GestionPersonalImpl implements GestionPersonalOperations {
 
@@ -232,22 +230,58 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public InfoSesionDTO consultarInfoSesion(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return objReferenciaRemota.consultarInfoSesion(id);
     }
 
     @Override
     public void validarValoracion(int id, String ocupacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int med = 0, psi = 0, fisi = 0;
+        DatosSesionDTO datosSesion;
+
+        if (ocupacion.equals("Medico")) {
+            med++;
+            datosSesion = new DatosSesionDTO(id, med, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        } else if (ocupacion.equals("Psicologa")) {
+            psi++;
+            datosSesion = new DatosSesionDTO(id, psi, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        } else {
+            fisi++;
+            datosSesion = new DatosSesionDTO(id, fisi, ocupacion);
+
+            listaDatosSesion.add(datosSesion);
+        }
     }
 
     @Override
     public int contador(int id, String ocupacion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (listaDatosSesion.size() == 0) {
+            return 0;
+        }
+        for (int i = 0; i < listaDatosSesion.size(); i++) {
+            if (listaDatosSesion.get(i).ocupacion.equals(ocupacion)) {
+                return listaDatosSesion.get(i).contValoracion;
+            }
+        }
+        return 0;
     }
 
     @Override
     public boolean eliminarList(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int cont = 0;
+        for (int i = 0; i < listaDatosSesion.size(); i++) {
+            if (listaDatosSesion.get(i).idPacienteValorado == id) {
+                listaDatosSesion.remove(i);
+            }
+            cont++;
+        }
+        if (cont == 0) {
+            return false;
+        }
+        return true;
     }
 
     @Override
