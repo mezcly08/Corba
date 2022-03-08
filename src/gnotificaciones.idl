@@ -1,0 +1,9 @@
+module sop_corba{
+    interface GestionNotificaciones{
+        struct notificacionDTO{
+            string nombreCompleto;
+            string ocupacion;
+        };
+        void enviarNotificacion(in notificacionDTO objNotificacion);
+    };
+};
