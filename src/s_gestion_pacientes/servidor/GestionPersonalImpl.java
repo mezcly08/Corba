@@ -6,10 +6,13 @@ import javax.naming.spi.DirStateFactory.Result;
 
 import org.omg.CORBA.BooleanHolder;
 import org.omg.CosNaming.NamingContextExt;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalOperations;
 import s_gestion_pacientes.sop_corba.GestionPersonalPOA;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO;
+import s_gestion_pacientes.sop_corba.GestionPersonalPackage.ValorarPacienteDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 import s_seguimiento_pacientes.sop_corba.GestionNotificaciones;
@@ -27,7 +30,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     String admOcup = "Admin";
     String admUser = "Admin";
     String admPsw = "12345";
-    personalDTO admin = new personalDTO(admtTipoID, admID, admNombre, admOcup, admUser, admPsw);
+    personalDTO admin = new personalDTO(admtTipoID, admID, admNombre, admOcup, admUser, admUser, admNombre);
 
     public GestionPersonalImpl() {
         lstPersonal = new ArrayList<personalDTO>();
@@ -126,6 +129,56 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public void registrarCallback(AdminCllbckint objCllbck) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean valorarPaciente(ValorarPacienteDTO objValorarPaciente) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean existenPacientes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void eliminarCallback(AdminCllbckint objAdmin) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean guardarInfoSesion(InfoSesionDTO objInfoSesionDTO) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public InfoSesionDTO consultarInfoSesion(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void validarValoracion(int id, String ocupacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int contador(int id, String ocupacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean eliminarList(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
