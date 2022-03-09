@@ -192,6 +192,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         bandera = objReferenciaRemota.guardarValoracionPaciente(objValorarPaciente);
         if (bandera == true) {
             System.out.println("Valoracion ingresada con exito");
+            valorarPaciente.add(objValorarPaciente);
             return true;
         } else {
             System.out.println("Error al ingresar la valoración");
@@ -334,12 +335,23 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public boolean existevaloracion(int id, String ocupacion) {
-        boolean objPaciente = false;
-        objPaciente = objReferenciaRemota.existevaloracion(id, ocupacion);
-        if(objPaciente){
-            return true;
+        System.out.println("tamanio: "+valorarPaciente.size() );
+        int valor=-1;
+        if(valorarPaciente.size()==0){
+            return false;
+        }else{
+            for(int i = 0; i<valorarPaciente.size(); i++){
+                if ((valorarPaciente.get(i).idPaciente).equals(id) && valorarPaciente.get(i).Profesion.equals(ocupacion))
+                    valor = i;
+            }
+            if(valor == -1){
+                return true;
+            }else{
+                return false;
+            }
+            
         }
-        return false;
+        
     }
 
 }

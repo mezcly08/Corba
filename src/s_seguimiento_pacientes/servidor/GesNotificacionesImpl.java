@@ -12,6 +12,8 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
     private Archivo objArchivo;
     ArrayList<ValorarPacienteDTO> lstValoraciones;
     ArrayList<InfoSesionDTO> lstSesiones;
+    ArrayList<ValorarPacienteDTO> lstValoracionesAux;
+    ArrayList<String> lineas;
 
     public GesNotificacionesImpl() {
         super();
@@ -61,6 +63,7 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
             return false;
         }
     }
+
     private ArrayList<ValorarPacienteDTO> armarOBJ(ArrayList<String> lstCadenas) {
         ValorarPacienteDTO objValorarPaciente;
         String[] cadena = null;
@@ -113,52 +116,32 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
 
     @Override
     public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
-       new Archivo("historialPacientes.txt");
-        ArrayList<ValorarPacienteDTO> lstValoracionesAux = new ArrayList<ValorarPacienteDTO>();
-        ArrayList<String> lineas = new ArrayList<String>();
-        try {
-            lineas = objArchivo.leerLineasArchivo();
 
-            lstValoracionesAux = armarOBJ(lineas);
-            int valor = -1;
-            for (int i = 0; i < lstValoracionesAux.size(); i++) {
-                if ((lstValoracionesAux.get(i).idPaciente).equals(id) && lstValoracionesAux.get(i).Profesion.equals(ocupacion)) {
-                    valor = i;
-                }
+        armartodo();
+        int valor = -1;
+        for (int i = 0; i < lstValoracionesAux.size(); i++) {
+            if ((lstValoracionesAux.get(i).idPaciente).equals(id) && lstValoracionesAux.get(i).Profesion.equals(ocupacion)) {
+                valor = i;
             }
-            if (valor != -1) {
-                return lstValoracionesAux.get(valor);
-            } else {
-                return null;
-            }
-        } catch (Exception e) {
+        }
+        if (valor != -1) {
+            return lstValoracionesAux.get(valor);
+        } else {
             return null;
         }
     }
 
+    public void armartodo() {
+        new Archivo("historialPacientes.txt");
+        lstValoracionesAux = new ArrayList<ValorarPacienteDTO>();
+        lineas = new ArrayList<String>();
+        lineas = objArchivo.leerLineasArchivo();
+        lstValoracionesAux = armarOBJ(lineas);
+    }
+
     @Override
     public boolean existevaloracion(int id, String ocupacion) {
-        new Archivo("historialPacientes.txt");
-        ArrayList<ValorarPacienteDTO> lstValoracionesAux = new ArrayList<ValorarPacienteDTO>();
-        ArrayList<String> lineas = new ArrayList<String>();
-        try {
-            lineas = objArchivo.leerLineasArchivo();
-
-            lstValoracionesAux = armarOBJ(lineas);
-            int valor = -1;
-            for (int i = 0; i < lstValoracionesAux.size(); i++) {
-                if ((lstValoracionesAux.get(i).idPaciente).equals(id) && lstValoracionesAux.get(i).Profesion.equals(ocupacion)) {
-                    valor = i;
-                }
-            }
-            if (valor != -1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
+        return false;
     }
 
 }

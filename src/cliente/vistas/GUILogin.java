@@ -271,6 +271,7 @@ public class GUILogin extends javax.swing.JFrame {
                             new GUIMenuMedico(ref, persona).setVisible(true);
                             break;
                         case "Fisioterapeuta":
+                             dispose();
                             new GUIMenuMedico(ref, persona).setVisible(true);
                             break;
                         default:
