@@ -1,6 +1,7 @@
 package cliente.vistas;
 
 
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
@@ -9,10 +10,12 @@ import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 public class GUILogin extends javax.swing.JFrame {
 
     private static GestionPersonal ref;
+    private static AdminCllbckint ref2;
     int xMouse, yMouse;
 
-    public GUILogin(GestionPersonal ref) {
+    public GUILogin(GestionPersonal ref, AdminCllbckint ref2) {
         this.ref = ref;
+        this.ref2 = ref2;
         initComponents();
         setLocationRelativeTo(null);
         TextPrompt textUsuario = new TextPrompt(" Ingrese su usuario", jtUsuario);
@@ -256,23 +259,23 @@ public class GUILogin extends javax.swing.JFrame {
                     switch (objPersonal.value.ocupacion) {
                         case "Admin":
                             dispose();
-                            new GUIMenuAdmin(ref, "Administrador").setVisible(true);
+                            new GUIMenuAdmin(ref, ref2, "Administrador").setVisible(true);
                             break;
                         case "Recepcionista":
                             dispose();
-                            new GUIMenuRecepcionista(ref, varCredencial.usuario).setVisible(true);
+                            new GUIMenuRecepcionista(ref, ref2, varCredencial.usuario).setVisible(true);
                             break;
                         case "Psicologa":
                             dispose();
-                            new GUIMenuMedico(ref, persona).setVisible(true);
+                            new GUIMenuMedico(ref, ref2, persona).setVisible(true);
                             break;
                         case "Medico":
                             dispose();
-                            new GUIMenuMedico(ref, persona).setVisible(true);
+                            new GUIMenuMedico(ref, ref2, persona).setVisible(true);
                             break;
                         case "Fisioterapeuta":
                              dispose();
-                            new GUIMenuMedico(ref, persona).setVisible(true);
+                            new GUIMenuMedico(ref, ref2, persona).setVisible(true);
                             break;
                         default:
                             break;

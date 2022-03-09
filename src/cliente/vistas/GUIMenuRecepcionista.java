@@ -2,15 +2,18 @@
 package cliente.vistas;
 
 import java.awt.BorderLayout;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 public class GUIMenuRecepcionista extends javax.swing.JFrame {
     
     private static GestionPersonal ref;
+    private static AdminCllbckint ref2;
     private int IdPersonal;
     int xMouse, yMouse;
     
-    public GUIMenuRecepcionista(GestionPersonal ref, String nomUsuario) {
+    public GUIMenuRecepcionista(GestionPersonal ref, AdminCllbckint ref2, String nomUsuario) {
         this.ref = ref;
+        this.ref2 = ref2;
         initComponents();
         setLocationRelativeTo(null);
         lblRecepcionista.setText("Bienvenido "+ nomUsuario);
@@ -200,7 +203,7 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         dispose();
-        new GUILogin(ref).setVisible(true);
+        new GUILogin(ref,ref2).setVisible(true);
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnConsultarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsultarPacienteMouseClicked

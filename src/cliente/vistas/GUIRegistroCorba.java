@@ -1,5 +1,6 @@
 package cliente.vistas;
 
+import cliente.AdminCllbckImpl;
 import cliente.vistas.GUILogin;
 import java.awt.Color;
 import javax.swing.JOptionPane;
@@ -13,12 +14,17 @@ import javafx.scene.control.Menu;
 import javax.rmi.CORBA.Util;
 
 import org.omg.CORBA.*;
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.POAHelper;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
+import s_gestion_pacientes.sop_corba.AdminCllbckintHelper;
 
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.credencialDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTOHolder;
 
 public class GUIRegistroCorba extends javax.swing.JFrame {
+
     private static GestionPersonal ref;
     Color objColorBG = new Color(38, 51, 68);
     int xMouse, yMouse;
@@ -203,7 +209,7 @@ public class GUIRegistroCorba extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel5MousePressed
 
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
-        
+
         int numPuertoNS = 0;
         String direccionIpNS = "";
         try {
@@ -227,8 +233,16 @@ public class GUIRegistroCorba extends javax.swing.JFrame {
                 String name = "objRemotoPersonal";
                 ref = GestionPersonalHelper.narrow(ncRef.resolve_str(name));
 
+                POA rootPOA1 = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+                rootPOA1.the_POAManager().activate();
+                // instancia el servant
+                AdminCllbckImpl cliente = new AdminCllbckImpl();
+                // obtiene la referencia del rootpoa & activate el POAManager
+                org.omg.CORBA.Object ref2 = rootPOA1.servant_to_reference(cliente);
+                AdminCllbckint href2 = AdminCllbckintHelper.narrow(ref2);
+
                 System.out.println("Obtenido el manejador sobre el servidor deobjetos: " + ref);
-                new GUILogin(ref).setVisible(true);
+                new GUILogin(ref,href2).setVisible(true);
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "No pueden haber campos vacios");

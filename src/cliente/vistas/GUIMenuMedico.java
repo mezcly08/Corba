@@ -3,17 +3,20 @@ package cliente.vistas;
 import cliente.AdminCllbckImpl;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
+import s_gestion_pacientes.sop_corba.AdminCllbckint;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 
 public class GUIMenuMedico extends javax.swing.JFrame {
 
     private static GestionPersonal ref;
+    private static AdminCllbckint ref2;
     private static personalDTO objUsuario;
     int xMouse, yMouse;
 
-    public GUIMenuMedico(GestionPersonal ref, personalDTO objUsuario) {
+    public GUIMenuMedico(GestionPersonal ref, AdminCllbckint ref2, personalDTO objUsuario) {
         this.ref = ref;
+        this.ref2 = ref2;
         this.objUsuario = objUsuario;
         initComponents();
         setLocationRelativeTo(null);
@@ -323,7 +326,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 //            System.out.println("Error: Callback no se pudo completar " + e.getMessage());
 //        }
         dispose();
-        new GUILogin(ref).setVisible(true);
+        new GUILogin(ref, ref2).setVisible(true);
 
     }//GEN-LAST:event_btnSalirMouseClicked
 
@@ -340,7 +343,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
     private void btnSalir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseClicked
         dispose();
-        new GUILogin(ref).setVisible(true);
+        new GUILogin(ref,ref2).setVisible(true);
     }//GEN-LAST:event_btnSalir1MouseClicked
 
     private void btnSalir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir2MouseClicked
