@@ -52,7 +52,7 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
         objArchivo = new Archivo("historialPacientes.txt");
         boolean bandera = false;
         String cadena = objValorarPaciente.idPaciente + "," + objValorarPaciente.concepto + ","
-                + objValorarPaciente.obversaciones + "," + objValorarPaciente.fechaValoracion + "," + objValorarPaciente.Profesion + "," + objValorarPaciente.NombreProfesional;
+                + objValorarPaciente.obversaciones + "," + objValorarPaciente.fechaValoracion + "," + objValorarPaciente.Profesion + "," + objValorarPaciente.NombreProfesional + "," + objValorarPaciente.estado;
         bandera = objArchivo.escribirLinea(cadena);
 
         if (bandera == true) {
@@ -70,7 +70,7 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
         for (int i = 0; i < lstCadenas.size(); i++) {
             cadena = lstCadenas.get(i).split(",");
             objValorarPaciente = new ValorarPacienteDTO(cadena[0], cadena[1], cadena[2], cadena[3],
-                    cadena[4], cadena[5]);
+                    cadena[4], cadena[5], cadena[6]);
             lstValoraciones.add(objValorarPaciente);
         }
         return lstValoraciones;

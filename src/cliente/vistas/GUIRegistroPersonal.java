@@ -204,7 +204,7 @@ public class GUIRegistroPersonal extends javax.swing.JPanel {
                         JOptionPane.showMessageDialog(null, "Personal registrado exitosamente!");
                         LimpiarCampos();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Personal no registrado");
+                        JOptionPane.showMessageDialog(null, "Personal no registrado se alcanzó el limite para la ocupacion " +objPersonalRegistrar.ocupacion);
                     }
                 }
             }

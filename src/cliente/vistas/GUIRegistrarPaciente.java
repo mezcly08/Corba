@@ -111,7 +111,7 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
         btnRegistrarPaciente.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         btnRegistrarPaciente.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarPaciente.setText("       Registrar");
-        btnRegistrarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarPaciente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegistrarPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnRegistrarPacienteMouseClicked(evt);
@@ -119,7 +119,7 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
         });
         jPanel1.add(btnRegistrarPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -1, 90, 30));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, 90, 30));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 90, 30));
 
         lblFormatIde.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
         lblFormatIde.setForeground(new java.awt.Color(87, 197, 186));

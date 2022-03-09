@@ -49,6 +49,9 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
         lblFormatIde = new javax.swing.JLabel();
         jtFechaValoracion = new javax.swing.JTextField();
         jSeparator7 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        jtEstadoPaciente = new javax.swing.JTextField();
+        jSeparator8 = new javax.swing.JSeparator();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -157,6 +160,18 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
         jPanel1.add(jtFechaValoracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 280, -1));
         jPanel1.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 280, -1));
 
+        jLabel7.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("Estado");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, -1, -1));
+
+        jtEstadoPaciente.setEditable(false);
+        jtEstadoPaciente.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jtEstadoPaciente.setForeground(new java.awt.Color(51, 51, 51));
+        jtEstadoPaciente.setBorder(null);
+        jPanel1.add(jtEstadoPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 280, -1));
+        jPanel1.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 280, 10));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,7 +180,7 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,6 +196,7 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
                         jtConceptoPaciente.setText(objValoracion.concepto);
                         jtObsPaciente.setText(objValoracion.obversaciones);
                         jtFechaValoracion.setText(objValoracion.fechaValoracion);
+                        jtEstadoPaciente.setText(objValoracion.estado);
                     } else {
                         JOptionPane.showMessageDialog(null, "No ha valorado al paciente");
                     }
@@ -221,6 +237,7 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -231,7 +248,9 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextField jtConceptoPaciente;
+    private javax.swing.JTextField jtEstadoPaciente;
     private javax.swing.JTextField jtFechaValoracion;
     private javax.swing.JTextField jtIdPaciente;
     private javax.swing.JTextField jtNomEspecialista;

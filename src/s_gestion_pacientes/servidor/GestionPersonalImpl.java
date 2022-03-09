@@ -31,9 +31,8 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
     private ArrayList<DatosSesionDTO> listaDatosSesion;
-    private int contador = 0;    
-    
-    
+    private int contador = 0;
+
     // Atributos del administrador
     String admNombre = "Administrador";
     String admtTipoID = "CC";
@@ -98,17 +97,65 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public void registrarPersonal(personalDTO objPersonal, BooleanHolder res) {
-        System.out.println("*** En registrarPersonal()...");
+        System.out.println("* En registrarPersonal()...");
+        int cont = 0;
         res.value = false;
         if (personal.size() < 6) {
-            if (personal.add(objPersonal)) {
-                res.value = true;
-                System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
-                        + " fue registrado con exito");
+            cont = contadorOcupacion(objPersonal.ocupacion);
+            switch (objPersonal.ocupacion) {
+                case "Recepcionista":
+                    if (cont < 1) {
+                        personal.add(objPersonal);
+                        res.value = true;
+                        System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
+                                + " fue registrado con exito");
+                    } else {
+                        System.out.println("Personal No registrado, se alcanzó la cantidad máxima de personas a registrar.");
+                    }
+                    break;
+                case "Fisioterapeuta":
+                    if (cont < 2) {
+                        personal.add(objPersonal);
+                        res.value = true;
+                        System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
+                                + " fue registrado con exito");
+                    } else {
+                        System.out.println("Personal No registrado, se alcanzó la cantidad máxima de personas a registrar.");
+                    }
+                    break;
+                case "Medico":
+                    if (cont < 2) {
+                        personal.add(objPersonal);
+                        res.value = true;
+                        System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
+                                + " fue registrado con exito");
+                    } else {
+                        System.out.println("Personal No registrado, se alcanzó la cantidad máxima de personas a registrar.");
+                    }
+                    break;
+                case "Psicologa":
+                    if (cont < 1) {
+                        personal.add(objPersonal);
+                        res.value = true;
+                        System.out.println("El personal " + objPersonal.nombreCompleto + " y ocupación " + objPersonal.ocupacion
+                                + " fue registrado con exito");
+                    } else {
+                        System.out.println("Personal No registrado, se alcanzó la cantidad máxima de personas a registrar.");
+                    }
+                    break;
             }
-        } else {
-            System.out.println("Personal No registrado, se alcanzó la cantidad máxima de personas a registrar.");
         }
+
+    }
+
+    public int contadorOcupacion(String ocupacion) {
+        int cont = 0;
+        for (int i = 0; i < personal.size(); i++) {
+            if (ocupacion.equals(personal.get(i).ocupacion)) {
+                cont++;
+            }
+        }
+        return cont;
     }
 
     @Override
@@ -335,23 +382,49 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public boolean existevaloracion(int id, String ocupacion) {
-        System.out.println("tamanio: "+valorarPaciente.size() );
-        int valor=-1;
-        if(valorarPaciente.size()==0){
+        System.out.println("tamanio: " + valorarPaciente.size());
+        int valor = -1;
+        if (valorarPaciente.size() == 0) {
             return false;
-        }else{
-            for(int i = 0; i<valorarPaciente.size(); i++){
-                if ((valorarPaciente.get(i).idPaciente).equals(id) && valorarPaciente.get(i).Profesion.equals(ocupacion))
+        } else {
+            for (int i = 0; i < valorarPaciente.size(); i++) {
+                if ((valorarPaciente.get(i).idPaciente).equals(id) && valorarPaciente.get(i).Profesion.equals(ocupacion)) {
                     valor = i;
+                }
             }
-            if(valor == -1){
+            if (valor == -1) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-            
+
         }
-        
+
+    }
+
+    @Override
+    public boolean validarEstadoPaciente(String id) {
+        boolean estadoMedico = false, estadoPsicologa = false;
+        int valor = 0;
+        for (int i = 0; i < valorarPaciente.size(); i++) {
+            if (valorarPaciente.get(i).idPaciente.equals(id)) {
+                valor = i;
+            }
+        }
+
+        if (valorarPaciente.get(valor).Profesion.equals("Medico") && valorarPaciente.get(valor).estado.equals("Sano")) {
+            estadoMedico = true;
+        }
+
+        if (valorarPaciente.get(valor).Profesion.equals("Psicologa") && valorarPaciente.get(valor).estado.equals("Sano")) {
+            estadoPsicologa = true;
+        }
+
+        if (estadoMedico && estadoPsicologa) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

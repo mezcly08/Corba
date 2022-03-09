@@ -44,7 +44,6 @@ module sop_corba{
 			string fechaIngreso; 
 			string ordenApoyo;
 			string hostoriaClinica;
-			string estado;
 		};
 		
 		struct ValorarPacienteDTO{
@@ -54,6 +53,7 @@ module sop_corba{
 			string fechaValoracion;
 			string Profesion;
 			string NombreProfesional;
+			string estado;
 		};
 
         void registrarPersonal(in personalDTO objPersonal, out boolean res);
@@ -73,5 +73,6 @@ module sop_corba{
         void validarValoracion(in long id, in string ocupacion);
 		long contador(in long id, in string ocupacion);
 		boolean eliminarList(in long id);
+		boolean validarEstadoPaciente(in string id);
     };
 };

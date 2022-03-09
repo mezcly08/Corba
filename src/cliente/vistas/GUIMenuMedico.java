@@ -2,12 +2,13 @@ package cliente.vistas;
 
 import cliente.AdminCllbckImpl;
 import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.personalDTO;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 
 public class GUIMenuMedico extends javax.swing.JFrame {
 
-     private static GestionPersonal ref;
+    private static GestionPersonal ref;
     private static personalDTO objUsuario;
     int xMouse, yMouse;
 
@@ -298,21 +299,21 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     private void btnValorPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValorPacienteMouseClicked
 
 //            if (ref.) { validacion que si existe pacientes
-                GUIValoracionPaciente jpRegistroUsuarios = new GUIValoracionPaciente(ref, objUsuario);
-                jpRegistroUsuarios.setSize(469, 443);
-                jpRegistroUsuarios.setLocation(5, 5);
+        GUIValoracionPaciente jpRegistroUsuarios = new GUIValoracionPaciente(ref, objUsuario);
+        jpRegistroUsuarios.setSize(469, 443);
+        jpRegistroUsuarios.setLocation(5, 5);
 
-                jPContenedor.removeAll();
-                jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-                jPContenedor.revalidate();
-                jPContenedor.repaint();
+        jPContenedor.removeAll();
+        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
+        jPContenedor.revalidate();
+        jPContenedor.repaint();
 //            } else {
 //                JOptionPane.showMessageDialog(null, "No hay pacientes para valorar!");
 //            }
 
     }//GEN-LAST:event_btnValorPacienteMouseClicked
 
-    
+
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
 //        try {
 //            System.out.println("***Eliminando CallBack...");
@@ -369,14 +370,25 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistorialPacienteMouseClicked
 
     private void btnSesionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionesMouseClicked
-        GUIFormFisio jpRegistroUsuarios = new GUIFormFisio(ref, objUsuario);
-        jpRegistroUsuarios.setSize(471, 483);
-        jpRegistroUsuarios.setLocation(5, 5);
 
-        jPContenedor.removeAll();
-        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-        jPContenedor.revalidate();
-        jPContenedor.repaint();
+        String idPaciente = JOptionPane.showInputDialog("Ingrese el id del paciente");
+
+        boolean bandera = false;
+
+        bandera = ref.validarEstadoPaciente(idPaciente);
+
+        if (bandera) {
+            JOptionPane.showMessageDialog(null, "El paciente se encuentra sano por lo tanto está inhabilitado.");
+        } else {
+            GUIFormFisio jpRegistroUsuarios = new GUIFormFisio(ref, objUsuario);
+            jpRegistroUsuarios.setSize(471, 483);
+            jpRegistroUsuarios.setLocation(5, 5);
+
+            jPContenedor.removeAll();
+            jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
+            jPContenedor.revalidate();
+            jPContenedor.repaint();
+        }
     }//GEN-LAST:event_btnSesionesMouseClicked
 
     private void btnInfoSesionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInfoSesionesMouseClicked

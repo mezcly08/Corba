@@ -19,6 +19,10 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         new TextPrompt("Ingrese Id del paciente", jtIdPaciente);
         new TextPrompt("Ingrese el concepto de la valoración", jtConceptoPaciente);
         new TextPrompt("Ingrese las observaciones", jtObsPaciente);
+        if (objUsuario.ocupacion.equals("Fisioterapeuta")) {
+            lblEstado.setVisible(false);
+            cbxEstadoPaciente.setVisible(false);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -31,7 +35,7 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         jtIdPaciente = new javax.swing.JTextField();
         jtConceptoPaciente = new javax.swing.JTextField();
         jtObsPaciente = new javax.swing.JTextField();
@@ -48,6 +52,8 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         btnRegistrar = new javax.swing.JLabel();
         lblFormatIde = new javax.swing.JLabel();
+        cbxEstadoPaciente = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,10 +83,10 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         jLabel5.setText("Profesión");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Nombre profesion");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        lblEstado.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        lblEstado.setForeground(new java.awt.Color(102, 102, 102));
+        lblEstado.setText("Estado");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, -1, -1));
 
         jtIdPaciente.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
         jtIdPaciente.setForeground(new java.awt.Color(51, 51, 51));
@@ -141,12 +147,20 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         });
         jPanel3.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, -1, 90, 30));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 90, 30));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 390, 90, 30));
 
         lblFormatIde.setBackground(new java.awt.Color(87, 197, 186));
         lblFormatIde.setFont(new java.awt.Font("Roboto", 1, 11)); // NOI18N
         lblFormatIde.setForeground(new java.awt.Color(87, 197, 186));
         jPanel1.add(lblFormatIde, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 280, 20));
+
+        cbxEstadoPaciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sano", "Regular", "Enfermo" }));
+        jPanel1.add(cbxEstadoPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 280, -1));
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel7.setText("Nombre profesion");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -163,29 +177,33 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
         if (campoVacio() != true) {
             boolean valor;
-            boolean existePaciente;
             try {
-                if (!ref.existenPacientes(Integer.parseInt(jtIdPaciente.getText())) ||  ref.contador(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText()) != 0 ) {
-                    JOptionPane.showMessageDialog(null, "No existe el paciente");
+                if (ref.contador(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText()) != 0) {
+                    JOptionPane.showMessageDialog(null, "Paciente ya valorado");
                 } else {
-                    PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(jtIdPaciente.getText()));
-                    if (objPaciente != null) {
-                        ValorarPacienteDTO objValorarPaciente = new ValorarPacienteDTO(jtIdPaciente.getText(), jtConceptoPaciente.getText(), jtObsPaciente.getText(),
-                                jdcFechaValoracion.getDate().toString(), jtProfesion.getText(), jtNomEspecialista.getText());
+                    if (ref.existenPacientes(Integer.parseInt(jtIdPaciente.getText()))) {
+                        PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(jtIdPaciente.getText()));
+                        if (objPaciente != null) {
+                            ValorarPacienteDTO objValorarPaciente = new ValorarPacienteDTO(jtIdPaciente.getText(), jtConceptoPaciente.getText(), jtObsPaciente.getText(),
+                                    jdcFechaValoracion.getDate().toString(), jtProfesion.getText(), jtNomEspecialista.getText(), cbxEstadoPaciente.getSelectedItem().toString());
 
-                        valor = ref.valorarPaciente(objValorarPaciente);
+                            valor = ref.valorarPaciente(objValorarPaciente);
 
-                        if (valor) {
-                            JOptionPane.showMessageDialog(null, "Valoracion registrada");
-                            ref.validarValoracion(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText());
-                            limpiarDatos();
+                            if (valor) {
+                                JOptionPane.showMessageDialog(null, "Valoracion registrada");
+                                ref.validarValoracion(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText());
+                                ref.eliminarList(Integer.parseInt(jtIdPaciente.getText()));
+                                limpiarDatos();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Error al registrar la valoracion");
+                            }
+
                         } else {
-                            JOptionPane.showMessageDialog(null, "Error al registrar la valoracion");
+                            JOptionPane.showMessageDialog(null, "El paciente no se encuentra registrado");
+                            limpiarDatos();
                         }
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "El paciente no se encuentra registrado");
-                        limpiarDatos();
+                    }else{
+                        JOptionPane.showMessageDialog(null, "El paciente no existe");
                     }
                 }
             } catch (Exception e) {
@@ -222,12 +240,13 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnRegistrar;
+    private javax.swing.JComboBox<String> cbxEstadoPaciente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -243,6 +262,7 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
     private javax.swing.JTextField jtNomEspecialista;
     private javax.swing.JTextField jtObsPaciente;
     private javax.swing.JTextField jtProfesion;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblFormatIde;
     // End of variables declaration//GEN-END:variables
 }
