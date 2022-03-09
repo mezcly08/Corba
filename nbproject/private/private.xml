@@ -3,23 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIConsultarFormFisio.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIRegistroPersonal.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIRegistroCorba.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIConsultarValoracion.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/servidor/ServidorDeObjetos.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIFormFisio.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_seguimiento_pacientes/servidor/GesNotificacionesImpl.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIRegistrarPaciente.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/sop_corba/GestionPersonalPackage/InfoSesionDTO.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIMenuMedico.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/AdminCllbckImpl.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/servidor/GestionPersonalImpl.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/sop_corba/GestionPersonalOperations.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_seguimiento_pacientes/sop_corba/GestionNotificacionesOperations.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIValoracionPaciente.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/s_gestion_pacientes/sop_corba/GestionPersonalPackage/DatosSesionDTO.java</file>
-            <file>file:/C:/Users/ALARCON/OneDrive/Documentos/NetBeansProjects/Corba/src/cliente/vistas/GUIMenuAdmin.java</file>
+            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/s_gestion_pacientes/sop_corba/GestionPersonalPackage/DatosSesionDTO.java</file>
+            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/cliente/vistas/GUIMenuRecepcionista.java</file>
+            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/s_gestion_pacientes/servidor/GestionPersonalImpl.java</file>
+            <file>file:/C:/Users/usuario/Desktop/ss/Corba/src/cliente/vistas/GUIMenuMedico.java</file>
         </group>
     </open-files>
 </project-private>

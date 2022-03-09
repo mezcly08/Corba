@@ -31,7 +31,6 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
     private ArrayList<DatosSesionDTO> listaDatosSesion;
-    private int contador = 0;
 
     // Atributos del administrador
     String admNombre = "Administrador";
@@ -432,6 +431,29 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean validaTodoVal(int id) {
+        boolean medico = false, fisio = false, psico = false;
+       for(int i = 0; i< valorarPaciente.size(); i++){
+           if (valorarPaciente.get(i).idPaciente.equals(id+"") ) {
+               System.out.println("id: "+valorarPaciente.get(i).idPaciente + "valoracion: "+valorarPaciente.get(i).Profesion);
+                if (valorarPaciente.get(i).Profesion.equals("Medico") ) {
+                    medico = true;
+                }
+                if (valorarPaciente.get(i).Profesion.equals("Psicologa") ) {
+                    psico = true;
+                }
+                if (valorarPaciente.get(i).Profesion.equals("Fisioterapeuta") ) {
+                    fisio = true;
+                }
+            }
+       }
+       if(medico && fisio && psico){
+           return true;
+       }
+       return false;
     }
 
 }

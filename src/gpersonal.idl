@@ -75,5 +75,6 @@ module sop_corba{
 		boolean eliminarList(in long id);
 		boolean validarEstadoPaciente(in string id);
 		boolean existenciaspersonal();
+		boolean validaTodoVal(in long id);
     };
 };

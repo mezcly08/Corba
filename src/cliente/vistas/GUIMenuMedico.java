@@ -286,10 +286,10 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         String idPaciente = JOptionPane.showInputDialog("Ingrese el id del paciente");
 
         boolean bandera = false;
-        
+
         try {
             if (idPaciente != null && idPaciente.length() > 0) {
-                if (ref.contador(Integer.parseInt(idPaciente), "Medico") == 1 && ref.contador(Integer.parseInt(idPaciente), "Psicologa") == 1 && ref.contador(Integer.parseInt(idPaciente), "Fisioterapeuta") == 1) {
+                if (ref.validaTodoVal(Integer.parseInt(idPaciente))) {
                     bandera = ref.validarEstadoPaciente(idPaciente);
                     if (bandera) {
                         JOptionPane.showMessageDialog(null, "El paciente se encuentra sano por lo tanto está inhabilitado.");
