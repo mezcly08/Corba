@@ -44,6 +44,7 @@ module sop_corba{
 			string fechaIngreso; 
 			string ordenApoyo;
 			string hostoriaClinica;
+			string estado;
 		};
 		
 		struct ValorarPacienteDTO{
