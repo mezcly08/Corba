@@ -1,6 +1,5 @@
 package s_gestion_pacientes.servidor;
 
-import cliente.AdminCllbckImpl;
 import java.util.ArrayList;
 
 import javax.naming.spi.DirStateFactory.Result;
@@ -27,6 +26,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     // Atributos
     private ArrayList<personalDTO> personal;
     private ArrayList<PacienteDTO> paciente;
+    private AdminCllbckint adminCllbckint; 
     private ArrayList<ValorarPacienteDTO> valorarPaciente;
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
@@ -350,9 +350,9 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         bandera = paciente.add(objPacientes);
 
         System.out.println("Paciente Registrado... ");
-        /* for (AdminCllbckInt objUsuario : lstAdminCallback) {
-            objUsuario.informarIngreso(objPacientes.getNombreCompleto(), objPacientes.getId());
-        }*/
+         for (AdminCllbckint objUsuario : lstAdminCallback) {
+           objUsuario.notificar(objPacientes.nombreCompleto, objPacientes.id);
+        }
         return bandera;
     }
 
@@ -424,6 +424,14 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean existenciaspersonal() {
+        if(paciente.size() == 0){
+            return false;
+        }
+        return true;
     }
 
 }

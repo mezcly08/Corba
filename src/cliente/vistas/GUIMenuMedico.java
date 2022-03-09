@@ -29,13 +29,9 @@ public class GUIMenuMedico extends javax.swing.JFrame {
             separador1.setVisible(false);
             separador2.setVisible(false);
         }
-//        try {
-//            System.out.println("***Registrando CallBack...");
-//            AdminCllbckImpl objAdmin = new AdminCllbckImpl();
-//            ref.registrarCallback(objAdmin);
-//        } catch (RemoteException e) {
-//            System.out.println("Error: Callback no se pudo completar " + e.getMessage());
-//        }
+        System.out.println("***Registrando CallBack...");
+        ref.registrarCallback(ref2);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -301,30 +297,27 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
     private void btnValorPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnValorPacienteMouseClicked
 
-//            if (ref.) { validacion que si existe pacientes
-        GUIValoracionPaciente jpRegistroUsuarios = new GUIValoracionPaciente(ref, objUsuario);
-        jpRegistroUsuarios.setSize(469, 443);
-        jpRegistroUsuarios.setLocation(5, 5);
+        if (ref.existenciaspersonal()) {
+            GUIValoracionPaciente jpRegistroUsuarios = new GUIValoracionPaciente(ref, objUsuario);
+            jpRegistroUsuarios.setSize(469, 443);
+            jpRegistroUsuarios.setLocation(5, 5);
 
-        jPContenedor.removeAll();
-        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-        jPContenedor.revalidate();
-        jPContenedor.repaint();
-//            } else {
-//                JOptionPane.showMessageDialog(null, "No hay pacientes para valorar!");
-//            }
+            jPContenedor.removeAll();
+            jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
+            jPContenedor.revalidate();
+            jPContenedor.repaint();
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay pacientes para valorar!");
+        }
 
     }//GEN-LAST:event_btnValorPacienteMouseClicked
 
 
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
-//        try {
-//            System.out.println("***Eliminando CallBack...");
-//            AdminCllbckImpl objAdmin = new AdminCllbckImpl();
-//            objRemoto.eliminarCallback(objAdmin);
-//        } catch (RemoteException e) {
-//            System.out.println("Error: Callback no se pudo completar " + e.getMessage());
-//        }
+
+        System.out.println("***Eliminando CallBack...");
+        ref.eliminarCallback(ref2);
+
         dispose();
         new GUILogin(ref, ref2).setVisible(true);
 
@@ -342,8 +335,11 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarPersonal1MouseClicked
 
     private void btnSalir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseClicked
+        System.out.println("***Eliminando CallBack...");
+        AdminCllbckImpl objAdmin = new AdminCllbckImpl();
+        ref.eliminarCallback(ref2);
         dispose();
-        new GUILogin(ref,ref2).setVisible(true);
+        new GUILogin(ref, ref2).setVisible(true);
     }//GEN-LAST:event_btnSalir1MouseClicked
 
     private void btnSalir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir2MouseClicked
