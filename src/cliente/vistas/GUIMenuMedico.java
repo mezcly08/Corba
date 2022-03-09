@@ -55,16 +55,6 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         lblMedico = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPContenedor = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        btnRegistrarPersonal1 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        lblRecepcionista1 = new javax.swing.JLabel();
-        jSeparator6 = new javax.swing.JSeparator();
-        btnSalir1 = new javax.swing.JLabel();
-        jSeparator7 = new javax.swing.JSeparator();
-        jSeparator8 = new javax.swing.JSeparator();
-        jLabel5 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSalir2 = new javax.swing.JLabel();
 
@@ -196,63 +186,6 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
         jPanel1.add(jPContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 480, 490));
 
-        jPanel3.setBackground(new java.awt.Color(38, 51, 68));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnRegistrarPersonal1.setBackground(new java.awt.Color(255, 255, 255));
-        btnRegistrarPersonal1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnRegistrarPersonal1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarPersonal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/add_user_male_25px.png"))); // NOI18N
-        btnRegistrarPersonal1.setText("Registrar Personal");
-        btnRegistrarPersonal1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-        btnRegistrarPersonal1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnRegistrarPersonal1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnRegistrarPersonal1MouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnRegistrarPersonal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 194, -1));
-
-        jSeparator5.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator5.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel3.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 214, 20));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/businessman_50px.png"))); // NOI18N
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, -1, -1));
-
-        lblRecepcionista1.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
-        lblRecepcionista1.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.add(lblRecepcionista1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 156, 22));
-
-        jSeparator6.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator6.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel3.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 214, 10));
-
-        btnSalir1.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        btnSalir1.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/cancel_25px.png"))); // NOI18N
-        btnSalir1.setText("Salir");
-        btnSalir1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnSalir1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnSalir1MouseClicked(evt);
-            }
-        });
-        jPanel3.add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
-
-        jSeparator7.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator7.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel3.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 214, 10));
-
-        jSeparator8.setBackground(new java.awt.Color(102, 102, 102));
-        jSeparator8.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel3.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 214, 10));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/logo.png"))); // NOI18N
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 540));
-
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -290,7 +223,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 330, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -323,25 +256,6 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSalirMouseClicked
 
-    private void btnRegistrarPersonal1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPersonal1MouseClicked
-        GUIRegistrarPaciente jpRegistroUsuarios = new GUIRegistrarPaciente(ref);
-        jpRegistroUsuarios.setSize(410, 467);
-        jpRegistroUsuarios.setLocation(5, 5);
-
-        jPContenedor.removeAll();
-        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-        jPContenedor.revalidate();
-        jPContenedor.repaint();
-    }//GEN-LAST:event_btnRegistrarPersonal1MouseClicked
-
-    private void btnSalir1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseClicked
-        System.out.println("***Eliminando CallBack...");
-        AdminCllbckImpl objAdmin = new AdminCllbckImpl();
-        ref.eliminarCallback(ref2);
-        dispose();
-        new GUILogin(ref, ref2).setVisible(true);
-    }//GEN-LAST:event_btnSalir1MouseClicked
-
     private void btnSalir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_btnSalir2MouseClicked
@@ -369,24 +283,35 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHistorialPacienteMouseClicked
 
     private void btnSesionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionesMouseClicked
-
         String idPaciente = JOptionPane.showInputDialog("Ingrese el id del paciente");
 
         boolean bandera = false;
+        
+        try {
+            if (idPaciente != null && idPaciente.length() > 0) {
+                if (ref.contador(Integer.parseInt(idPaciente), "Medico") == 1 && ref.contador(Integer.parseInt(idPaciente), "Psicologa") == 1 && ref.contador(Integer.parseInt(idPaciente), "Fisioterapeuta") == 1) {
+                    bandera = ref.validarEstadoPaciente(idPaciente);
+                    if (bandera) {
+                        JOptionPane.showMessageDialog(null, "El paciente se encuentra sano por lo tanto está inhabilitado.");
+                    } else {
+                        GUIFormFisio jpRegistroUsuarios = new GUIFormFisio(ref, objUsuario);
+                        jpRegistroUsuarios.setSize(471, 483);
+                        jpRegistroUsuarios.setLocation(5, 5);
 
-        bandera = ref.validarEstadoPaciente(idPaciente);
+                        jPContenedor.removeAll();
+                        jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
+                        jPContenedor.revalidate();
+                        jPContenedor.repaint();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El paciente no se encuentra valorado");
+                }
 
-        if (bandera) {
-            JOptionPane.showMessageDialog(null, "El paciente se encuentra sano por lo tanto está inhabilitado.");
-        } else {
-            GUIFormFisio jpRegistroUsuarios = new GUIFormFisio(ref, objUsuario);
-            jpRegistroUsuarios.setSize(471, 483);
-            jpRegistroUsuarios.setLocation(5, 5);
-
-            jPContenedor.removeAll();
-            jPContenedor.add(jpRegistroUsuarios, BorderLayout.CENTER);
-            jPContenedor.revalidate();
-            jPContenedor.repaint();
+            } else {
+                JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
+            }
+        } catch (Exception e) {
+            //JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
         }
     }//GEN-LAST:event_btnSesionesMouseClicked
 
@@ -405,31 +330,21 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnHistorialPaciente;
     private javax.swing.JLabel btnInfoSesiones;
-    private javax.swing.JLabel btnRegistrarPersonal1;
     private javax.swing.JLabel btnSalir;
-    private javax.swing.JLabel btnSalir1;
     private javax.swing.JLabel btnSalir2;
     private javax.swing.JLabel btnSesiones;
     private javax.swing.JLabel btnValorPaciente;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPContenedor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblMedico;
     private javax.swing.JLabel lblOcupacion;
-    private javax.swing.JLabel lblRecepcionista1;
     private javax.swing.JSeparator separador1;
     private javax.swing.JSeparator separador2;
     // End of variables declaration//GEN-END:variables
