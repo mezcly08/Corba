@@ -409,15 +409,14 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         for (int i = 0; i < valorarPaciente.size(); i++) {
             if (valorarPaciente.get(i).idPaciente.equals(id)) {
                 valor = i;
+                if (valorarPaciente.get(valor).Profesion.equals("Medico") && valorarPaciente.get(valor).estado.equals("Sano")) {
+                    estadoMedico = true;
+                }
+
+                if (valorarPaciente.get(valor).Profesion.equals("Psicologa") && valorarPaciente.get(valor).estado.equals("Sano")) {
+                    estadoPsicologa = true;
+                }
             }
-        }
-
-        if (valorarPaciente.get(valor).Profesion.equals("Medico") && valorarPaciente.get(valor).estado.equals("Sano")) {
-            estadoMedico = true;
-        }
-
-        if (valorarPaciente.get(valor).Profesion.equals("Psicologa") && valorarPaciente.get(valor).estado.equals("Sano")) {
-            estadoPsicologa = true;
         }
 
         if (estadoMedico && estadoPsicologa) {
