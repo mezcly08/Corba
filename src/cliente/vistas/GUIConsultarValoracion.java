@@ -170,23 +170,29 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConsulValoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConsulValoMouseClicked
-    int id= Integer.parseInt(jtIdPaciente.getText());
-        try {
-            if(ref.existenPacientes(id)){
-                if(ref.existevaloracion(id, objUsuario.ocupacion)){
-                    ValorarPacienteDTO objValoracion = ref.consultarValoracion(jtIdPaciente.getText(),jtProfesion.getText());
-                    jtConceptoPaciente.setText(objValoracion.concepto);
-                    jtObsPaciente.setText(objValoracion.obversaciones);
-                    jtFechaValoracion.setText(objValoracion.fechaValoracion);
-                }else{
-                    JOptionPane.showMessageDialog(null, "No ha valorado al paciente");
-                }         
-            
-            } else {
-                JOptionPane.showMessageDialog(null, "El paciente no se encuentra registrado");
+    
+        if (!existenCamposVacios()) {
+            try {
+                int id = Integer.parseInt(jtIdPaciente.getText());
+                if (ref.existenPacientes(id)) {
+                    PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(jtIdPaciente.getText()));
+                    if (ref.existevaloracion(id, objUsuario.ocupacion)) {
+                        ValorarPacienteDTO objValoracion = ref.consultarValoracion(jtIdPaciente.getText(), jtProfesion.getText());
+                        jtConceptoPaciente.setText(objValoracion.concepto);
+                        jtObsPaciente.setText(objValoracion.obversaciones);
+                        jtFechaValoracion.setText(objValoracion.fechaValoracion);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No ha valorado al paciente");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "El paciente no se encuentra registrado");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La operacion no se pudo completar, intente nuevamente...");
             }
-        } catch (Exception e) {
-            System.out.println("La operacion no se pudo completar, intente nuevamente...");
+        } else {
+            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios");
         }
     }//GEN-LAST:event_btnConsulValoMouseClicked
 
@@ -199,6 +205,13 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
             lblFormatIde.setText("");
         }
     }//GEN-LAST:event_jtIdPacienteKeyTyped
+    
+    private boolean existenCamposVacios() {
+        if (jtIdPaciente.getText().isEmpty()) {
+            return true;
+        }
+        return false;
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnConsulValo;

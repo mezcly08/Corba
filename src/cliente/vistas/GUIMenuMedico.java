@@ -17,6 +17,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         lblMedico.setText("Bienvenido " + objUsuario.nombreCompleto);
+        lblOcupacion.setText(objUsuario.ocupacion);
 
         if (objUsuario.ocupacion.equals("Medico") || objUsuario.ocupacion.equals("Psicologa")) {
             btnSesiones.setVisible(false);
@@ -41,7 +42,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         btnValorPaciente = new javax.swing.JLabel();
         separador2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        lblMedico = new javax.swing.JLabel();
+        lblOcupacion = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnSalir = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
@@ -51,6 +52,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         btnSesiones = new javax.swing.JLabel();
         btnInfoSesiones = new javax.swing.JLabel();
         separador1 = new javax.swing.JSeparator();
+        lblMedico = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPContenedor = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -87,22 +89,23 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 btnValorPacienteMouseClicked(evt);
             }
         });
-        jPanel2.add(btnValorPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 194, -1));
+        jPanel2.add(btnValorPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 194, -1));
 
         separador2.setBackground(new java.awt.Color(102, 102, 102));
         separador2.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel2.add(separador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 214, 20));
+        jPanel2.add(separador2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 214, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/businessman_50px.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 440, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, -1, -1));
 
-        lblMedico.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
-        lblMedico.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(lblMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 500, 156, 22));
+        lblOcupacion.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
+        lblOcupacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblOcupacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblOcupacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 156, 22));
 
         jSeparator2.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator2.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 214, 10));
+        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 214, 10));
 
         btnSalir.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,18 +117,18 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 btnSalirMouseClicked(evt);
             }
         });
-        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 390, -1, -1));
+        jPanel2.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
 
         jSeparator4.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator4.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 430, 214, 10));
+        jPanel2.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 214, 10));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/logo.png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jSeparator9.setBackground(new java.awt.Color(102, 102, 102));
         jSeparator9.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 214, 10));
+        jPanel2.add(jSeparator9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 214, 10));
 
         btnHistorialPaciente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnHistorialPaciente.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,7 +140,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 btnHistorialPacienteMouseClicked(evt);
             }
         });
-        jPanel2.add(btnHistorialPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 190, 30));
+        jPanel2.add(btnHistorialPaciente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 190, 30));
 
         btnSesiones.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnSesiones.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +152,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 btnSesionesMouseClicked(evt);
             }
         });
-        jPanel2.add(btnSesiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel2.add(btnSesiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         btnInfoSesiones.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnInfoSesiones.setForeground(new java.awt.Color(255, 255, 255));
@@ -161,16 +164,21 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 btnInfoSesionesMouseClicked(evt);
             }
         });
-        jPanel2.add(btnInfoSesiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 180, -1));
+        jPanel2.add(btnInfoSesiones, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 180, -1));
 
         separador1.setBackground(new java.awt.Color(102, 102, 102));
         separador1.setForeground(new java.awt.Color(38, 51, 68));
-        jPanel2.add(separador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 214, 20));
+        jPanel2.add(separador1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 214, 20));
+
+        lblMedico.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
+        lblMedico.setForeground(new java.awt.Color(255, 255, 255));
+        lblMedico.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblMedico, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 470, 156, 22));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 540));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 51, 68)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPContenedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -179,14 +187,14 @@ public class GUIMenuMedico extends javax.swing.JFrame {
         jPContenedor.setLayout(jPContenedorLayout);
         jPContenedorLayout.setHorizontalGroup(
             jPContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         jPContenedorLayout.setVerticalGroup(
             jPContenedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 490, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 490, 490));
+        jPanel1.add(jPContenedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 480, 490));
 
         jPanel3.setBackground(new java.awt.Color(38, 51, 68));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -282,7 +290,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 330, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -409,6 +417,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JLabel lblMedico;
+    private javax.swing.JLabel lblOcupacion;
     private javax.swing.JLabel lblRecepcionista1;
     private javax.swing.JSeparator separador1;
     private javax.swing.JSeparator separador2;

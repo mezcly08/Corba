@@ -14,6 +14,7 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         lblRecepcionista.setText("Bienvenido "+ nomUsuario);
+        lblOcupacion.setText("Recepcionista");
     }
 
     @SuppressWarnings("unchecked")
@@ -26,13 +27,14 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
         btnRegistrarPaciente = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        lblRecepcionista = new javax.swing.JLabel();
+        lblOcupacion = new javax.swing.JLabel();
         btnConsultarPaciente = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         btnSalir = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
+        lblRecepcionista = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         btnSalir1 = new javax.swing.JLabel();
 
@@ -41,6 +43,7 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(38, 51, 68)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPContenedor.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,11 +83,12 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
         jPanel2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 214, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/businessman_50px.png"))); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 420, -1, -1));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, -1, -1));
 
-        lblRecepcionista.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
-        lblRecepcionista.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(lblRecepcionista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 156, 22));
+        lblOcupacion.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
+        lblOcupacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblOcupacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblOcupacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 156, 22));
 
         btnConsultarPaciente.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         btnConsultarPaciente.setForeground(new java.awt.Color(255, 255, 255));
@@ -124,6 +128,11 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cliente/recursos/logo.png"))); // NOI18N
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+
+        lblRecepcionista.setFont(new java.awt.Font("Roboto Condensed", 1, 14)); // NOI18N
+        lblRecepcionista.setForeground(new java.awt.Color(255, 255, 255));
+        lblRecepcionista.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jPanel2.add(lblRecepcionista, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 156, 22));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 540));
 
@@ -270,6 +279,7 @@ public class GUIMenuRecepcionista extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lblOcupacion;
     private javax.swing.JLabel lblRecepcionista;
     // End of variables declaration//GEN-END:variables
 }

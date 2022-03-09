@@ -1,11 +1,11 @@
 package cliente.vistas;
 
-
 import javax.swing.JOptionPane;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.PacienteDTO;
 
 public class GUIRegistrarPaciente extends javax.swing.JPanel {
+
     private static GestionPersonal ref;
 
     public GUIRegistrarPaciente(GestionPersonal ref) {
@@ -127,28 +127,32 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarPacienteMouseClicked
-        //Hay que hacer el consul paciente que retorne un boolean
-        int id = Integer.parseInt(jtIdentificacion.getText());
-        if (campoVacio() != true) {
-            if (validarDatos()) {
-                JOptionPane.showMessageDialog(null, "Error de datos ingresados");
-            } else {
-                if (ref.existenPacientes(id)) {
-                    JOptionPane.showMessageDialog(null, "El id " + jtIdentificacion.getText() + " Ya se encuentra en uso");     
+        try {
+
+            if (campoVacio() != true) {
+                int id = Integer.parseInt(jtIdentificacion.getText());
+                if (validarDatos()) {
+                    JOptionPane.showMessageDialog(null, "Error de datos ingresados");
                 } else {
-                    PacienteDTO objPaciente = new PacienteDTO(jtNombreCompleto.getText(), Integer.parseInt(jtIdentificacion.getText()), jdcFechaIngreso.getDate().toString(),
-                            jtOrdenEps.getText(), jtHistoriaClinica.getText());
-                    boolean valor = ref.registrarPaciente(objPaciente);
-                    if (valor) {
-                        JOptionPane.showMessageDialog(null, "Paciente registrado exitosamente!");
-                        limpiarCampos();
+                    if (ref.existenPacientes(id)) {
+                        JOptionPane.showMessageDialog(null, "El id " + jtIdentificacion.getText() + " Ya se encuentra en uso");
                     } else {
-                        JOptionPane.showMessageDialog(null, "Paciente no registrado");
-                    } 
+                        PacienteDTO objPaciente = new PacienteDTO(jtNombreCompleto.getText(), Integer.parseInt(jtIdentificacion.getText()), jdcFechaIngreso.getDate().toString(),
+                                jtOrdenEps.getText(), jtHistoriaClinica.getText());
+                        boolean valor = ref.registrarPaciente(objPaciente);
+                        if (valor) {
+                            JOptionPane.showMessageDialog(null, "Paciente registrado exitosamente!");
+                            limpiarCampos();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Paciente no registrado");
+                        }
+                    }
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "No pueden haber campos vacios!");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "No pueden haber campos vacios!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La operacion no se pudo completar, intente nuevamente...");
         }
     }//GEN-LAST:event_btnRegistrarPacienteMouseClicked
 
@@ -161,7 +165,7 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
             lblFormatIde.setText("");
         }
     }//GEN-LAST:event_jtIdentificacionKeyTyped
-    
+
     private boolean campoVacio() {
         if (jtNombreCompleto.getText().isEmpty() || jtIdentificacion.getText().isEmpty() || jdcFechaIngreso.getDate() == null
                 || jtOrdenEps.getText().isEmpty() || jtHistoriaClinica.getText().isEmpty()) {
@@ -169,7 +173,7 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
         }
         return false;
     }
-    
+
     private boolean validarDatos() {
         if (jtNombreCompleto.getText().length() > 64
                 || Integer.parseInt(jtIdentificacion.getText()) < 1
@@ -187,7 +191,7 @@ public class GUIRegistrarPaciente extends javax.swing.JPanel {
         this.jtOrdenEps.setText(null);
         this.jdcFechaIngreso.setDate(null);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnRegistrarPaciente;
