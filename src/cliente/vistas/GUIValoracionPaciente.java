@@ -163,23 +163,26 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
     private void btnRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarMouseClicked
         if (campoVacio() != true) {
             boolean valor;
+            boolean existePaciente;
             try {
-                if (ref.contador(Integer.parseInt(jtIdPaciente.getText()),jtProfesion.getText()) != 0) {
-                    JOptionPane.showMessageDialog(null, "Ya valoraste a ese paciente");
+                if (!ref.existenPacientes(Integer.parseInt(jtIdPaciente.getText())) ||  ref.contador(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText()) != 0 ) {
+                    JOptionPane.showMessageDialog(null, "No existe el paciente");
                 } else {
                     PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(jtIdPaciente.getText()));
                     if (objPaciente != null) {
                         ValorarPacienteDTO objValorarPaciente = new ValorarPacienteDTO(jtIdPaciente.getText(), jtConceptoPaciente.getText(), jtObsPaciente.getText(),
                                 jdcFechaValoracion.getDate().toString(), jtProfesion.getText(), jtNomEspecialista.getText());
+
                         valor = ref.valorarPaciente(objValorarPaciente);
 
                         if (valor) {
                             JOptionPane.showMessageDialog(null, "Valoracion registrada");
-                            ref.validarValoracion(Integer.parseInt(jtIdPaciente.getText()),jtProfesion.getText());
+                            ref.validarValoracion(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText());
                             limpiarDatos();
                         } else {
                             JOptionPane.showMessageDialog(null, "Error al registrar la valoracion");
                         }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "El paciente no se encuentra registrado");
                         limpiarDatos();
