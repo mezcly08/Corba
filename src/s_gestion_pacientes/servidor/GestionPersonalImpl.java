@@ -31,6 +31,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
     private ArrayList<DatosSesionDTO> listaDatosSesion;
+    private ArrayList<InfoSesionDTO> listaInfoSesion;
 
     // Atributos del administrador
     String admNombre = "Administrador";
@@ -49,6 +50,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         this.paciente = new ArrayList<PacienteDTO>();
         this.valorarPaciente = new ArrayList<ValorarPacienteDTO>();
         this.listaDatosSesion = new ArrayList<DatosSesionDTO>();
+        this.listaInfoSesion = new ArrayList<InfoSesionDTO>();
     }
 
     @Override
@@ -266,6 +268,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         boolean bandera = false;
         bandera = objReferenciaRemota.guardarInfoSesion(objInfoSesionDTO);
         if (bandera == true) {
+            listaInfoSesion.add(objInfoSesionDTO);
             System.out.println("La Informacion de la sesion fue ingresada con exito");
             return true;
         } else {
@@ -303,16 +306,17 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-    public int contador(int id, String ocupacion) {
-        if (listaDatosSesion.size() == 0) {
-            return 0;
+    public boolean existeSesion(int id) {
+        boolean bandera = false;
+        if (listaInfoSesion.size() == 0) {
+            return false;
         }
-        for (int i = 0; i < listaDatosSesion.size(); i++) {
-            if (listaDatosSesion.get(i).ocupacion.equals(ocupacion)) {
-                return listaDatosSesion.get(i).contValoracion;
+        for (int i = 0; i < listaInfoSesion.size(); i++) {
+            if (listaInfoSesion.get(i).idPaciente == id) {
+                bandera = true;
             }
         }
-        return 0;
+        return bandera;
     }
 
     @Override
@@ -384,19 +388,21 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         System.out.println("En existeValoracion");
         int cont = 0;
         for (int i = 0; i < valorarPaciente.size(); i++) {
-            if(valorarPaciente.get(i).idPaciente.equals(id+"")){
-                if(valorarPaciente.get(i).Profesion.equals(ocupacion))
+            if (valorarPaciente.get(i).idPaciente.equals(id + "")) {
+                if (valorarPaciente.get(i).Profesion.equals(ocupacion)) {
                     cont++;
+                }
             }
         }
-        if(cont== 1){
+        if (cont == 1) {
             return true;
-        }else
+        } else {
             return false;
-}
+        }
+    }
 
-@Override
-        public boolean validarEstadoPaciente(String id) {
+    @Override
+    public boolean validarEstadoPaciente(String id) {
         boolean estadoMedico = false, estadoPsicologa = false;
         int valor = 0;
         for (int i = 0; i < valorarPaciente.size(); i++) {
@@ -420,34 +426,35 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-        public boolean existenciaspersonal() {
-        if(paciente.size() == 0){
+    public boolean existenciaspersonal() {
+        if (paciente.size() == 0) {
             return false;
         }
         return true;
     }
 
     @Override
-        public boolean validaTodoVal(int id) {
+    public boolean validaTodoVal(int id) {
         boolean medico = false, fisio = false, psico = false;
-       for(int i = 0; i< valorarPaciente.size(); i++){
-           if (valorarPaciente.get(i).idPaciente.equals(id+"") ) {
-               System.out.println("id: "+valorarPaciente.get(i).idPaciente + "valoracion: "+valorarPaciente.get(i).Profesion);
-                if (valorarPaciente.get(i).Profesion.equals("Medico") ) {
+        for (int i = 0; i < valorarPaciente.size(); i++) {
+            if (valorarPaciente.get(i).idPaciente.equals(id + "")) {
+                System.out.println("id: " + valorarPaciente.get(i).idPaciente + "valoracion: " + valorarPaciente.get(i).Profesion);
+                if (valorarPaciente.get(i).Profesion.equals("Medico")) {
                     medico = true;
                 }
-                if (valorarPaciente.get(i).Profesion.equals("Psicologa") ) {
+                if (valorarPaciente.get(i).Profesion.equals("Psicologa")) {
                     psico = true;
                 }
-                if (valorarPaciente.get(i).Profesion.equals("Fisioterapeuta") ) {
+                if (valorarPaciente.get(i).Profesion.equals("Fisioterapeuta")) {
                     fisio = true;
                 }
             }
-       }
-       if(medico && fisio && psico){
-           return true;
-       }
-       return false;
+        }
+        if (medico && fisio && psico) {
+            return true;
+        }
+        return false;
     }
+
 
 }

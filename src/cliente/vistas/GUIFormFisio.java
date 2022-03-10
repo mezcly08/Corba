@@ -1,6 +1,5 @@
 package cliente.vistas;
 
-
 import javax.swing.JOptionPane;
 import s_gestion_pacientes.sop_corba.GestionPersonal;
 import s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO;
@@ -221,33 +220,30 @@ public class GUIFormFisio extends javax.swing.JPanel {
         if (existenCamposVacios() != true) {
             int numerofase = 0;
             int numerosesion = 0;
+            int id = Integer.parseInt(jTextIdentificacion.getText());
+            InfoSesionDTO objInfo = new InfoSesionDTO();
+            objInfo = null;
             if (validarDatos()) {
                 JOptionPane.showMessageDialog(null, "Error de datos ingresados");
             } else {
                 boolean valor;
                 try {
-                    InfoSesionDTO objInfo = ref.consultarInfoSesion(Integer.parseInt(jTextIdentificacion.getText()));
-                    int id = Integer.parseInt(jTextIdentificacion.getText());
-                    if(objInfo == null){
-                        
-                    }else if (objInfo.numSesion== 2) {
-                        JOptionPane.showMessageDialog(null, "Acabamos la fase ");
-                        ref.eliminarList(id);
+                    if (ref.existeSesion(id)) {
+                        objInfo = ref.consultarInfoSesion(Integer.parseInt(jTextIdentificacion.getText()));
+                        if (objInfo.numSesion == 12) {
+                                JOptionPane.showMessageDialog(null, "Acabamos la fase ");
+                                ref.eliminarList(id);
+                            }
                     }
-                        if (ref.contador(id, "Medico") == 1 && ref.contador(id, "Psicologa") == 1 && ref.contador(id, "Fisioterapeuta") == 1) {
-                            PacienteDTO objPacienteReg = ref.consultarPaciente(Integer.parseInt(jTextIdentificacion.getText()));
-
-                            if (objPacienteReg != null) {
+                    if (ref.validaTodoVal(id)) {
+                        PacienteDTO objPacienteReg = ref.consultarPaciente(Integer.parseInt(jTextIdentificacion.getText()));
+                        if (objPacienteReg != null) {
                                 if (objInfo == null) {
                                     numerofase++;
-                                    numerosesion++;
-                                }else if(numerosesion ==2){
-                                    numerofase++;
-                                    numerosesion++;
+                                    numerosesion = numerosesion + 1;
                                 }else {
-                                    numerofase = objInfo.numFase;
-                                    numerosesion = objInfo.numSesion;
-                                    numerosesion++;
+                                    numerofase = objInfo.numFase+2;
+                                    numerosesion = objInfo.numSesion + 1;
                                 }
                                 InfoSesionDTO objInfoSesion = new InfoSesionDTO(Integer.parseInt(jTextIdentificacion.getText()),
                                         numerofase, jFechaSesion.getDate().toString(),
@@ -264,13 +260,14 @@ public class GUIFormFisio extends javax.swing.JPanel {
                                 } else {
                                     JOptionPane.showMessageDialog(null, "No se pudo registrar la información");
                                 }
-                            } else {
-                                JOptionPane.showMessageDialog(null, "El id " + objPacienteReg.id + " Ya se encuentra en uso");
-
-                            }
+                            
                         } else {
-                            JOptionPane.showMessageDialog(null, "Hacen falta valoraciones");
+                            JOptionPane.showMessageDialog(null, "El id " + objPacienteReg.id + " Ya se encuentra en uso");
+
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Hacen falta valoraciones");
+                    }
 
                 } catch (Exception e) {
                     System.out.println("La operacion no se pudo completar, intente nuevamente...");

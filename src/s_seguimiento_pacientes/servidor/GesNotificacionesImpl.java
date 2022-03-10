@@ -32,7 +32,7 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
     public boolean guardarInfoSesion(s_gestion_pacientes.sop_corba.GestionPersonalPackage.InfoSesionDTO objInfoSesion) {
         objArchivo = new Archivo("listadoSesionesPaciente_" + objInfoSesion.idPaciente + ".txt");
         boolean bandera = false;
-        String cadena = objInfoSesion.idPaciente + "," + objInfoSesion.numFase + "," + objInfoSesion.fechaSesion
+        String cadena = objInfoSesion.idPaciente + "," + objInfoSesion.numFase + ","  + objInfoSesion.fechaSesion
                 + "," + objInfoSesion.numSesion + "," + objInfoSesion.presionArterial + "," + objInfoSesion.frecuenciaInicial
                 + "," + objInfoSesion.frecuenciaFinal + "," + objInfoSesion.saturacionOxigeno + "," + objInfoSesion.estadoPaciente
                 + "," + objInfoSesion.observaciones;
@@ -116,7 +116,6 @@ public class GesNotificacionesImpl implements GestionNotificacionesOperations {
 
     @Override
     public ValorarPacienteDTO consultarValoracion(String id, String ocupacion) {
-
         armartodo();
         int valor = -1;
         for (int i = 0; i < lstValoracionesAux.size(); i++) {

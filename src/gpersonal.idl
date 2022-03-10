@@ -71,7 +71,7 @@ module sop_corba{
 		boolean guardarInfoSesion(in InfoSesionDTO objInfoSesionDTO);
 		InfoSesionDTO consultarInfoSesion( in long id);
         void validarValoracion(in long id, in string ocupacion);
-		long contador(in long id, in string ocupacion);
+		boolean existeSesion(in long id);
 		boolean eliminarList(in long id);
 		boolean validarEstadoPaciente(in string id);
 		boolean existenciaspersonal();
