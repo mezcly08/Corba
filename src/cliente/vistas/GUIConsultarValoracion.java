@@ -190,7 +190,6 @@ public class GUIConsultarValoracion extends javax.swing.JPanel {
             try {
                 int id = Integer.parseInt(jtIdPaciente.getText());
                 if (ref.existenPacientes(id)) {
-                    PacienteDTO objPaciente = ref.consultarPaciente(Integer.parseInt(jtIdPaciente.getText()));
                     if (ref.existevaloracion(id, objUsuario.ocupacion)) {
                         ValorarPacienteDTO objValoracion = ref.consultarValoracion(jtIdPaciente.getText(), jtProfesion.getText());
                         jtConceptoPaciente.setText(objValoracion.concepto);

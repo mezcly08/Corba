@@ -322,12 +322,6 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     @Override
     public boolean eliminarList(int id) {
         int cont = 0;
-        for (int i = 0; i < valorarPaciente.size(); i++) {
-            if (valorarPaciente.get(i).idPaciente.equals(id+"")) {
-                valorarPaciente.remove(i);
-                System.out.println("paciente valorado: "+valorarPaciente.get(i).idPaciente);
-            }
-        }
         for (int i = 0; i < listaDatosSesion.size(); i++) {
             if (listaDatosSesion.get(i).idPacienteValorado == id) {
                 listaDatosSesion.remove(i);
@@ -383,7 +377,6 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         for (int i = 0; i < this.paciente.size(); i++) {
             if (this.paciente.get(i).id == id) {
                 resultado = true;
-                break;
             }
         }
         return resultado;
@@ -393,6 +386,9 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     public boolean existevaloracion(int id, String ocupacion) {
         System.out.println("En existeValoracion");
         int cont = 0;
+        if(valorarPaciente.size() == 0){
+            return false;
+        }
         for (int i = 0; i < valorarPaciente.size(); i++) {
             if (valorarPaciente.get(i).idPaciente.equals(id + "")) {
                 if (valorarPaciente.get(i).Profesion.equals(ocupacion)) {
