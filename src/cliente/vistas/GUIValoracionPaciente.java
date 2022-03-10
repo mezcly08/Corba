@@ -178,7 +178,7 @@ public class GUIValoracionPaciente extends javax.swing.JPanel {
         if (campoVacio() != true) {
             boolean valor;
             try {
-                if (ref.contador(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText()) != 0) {
+                if (ref.existevaloracion(Integer.parseInt(jtIdPaciente.getText()), jtProfesion.getText()) ) {
                     JOptionPane.showMessageDialog(null, "Paciente ya valorado");
                 } else {
                     if (ref.existenPacientes(Integer.parseInt(jtIdPaciente.getText()))) {

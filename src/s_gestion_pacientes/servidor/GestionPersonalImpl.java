@@ -26,7 +26,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     // Atributos
     private ArrayList<personalDTO> personal;
     private ArrayList<PacienteDTO> paciente;
-    private AdminCllbckint adminCllbckint; 
+    private AdminCllbckint adminCllbckint;
     private ArrayList<ValorarPacienteDTO> valorarPaciente;
     private ArrayList<AdminCllbckint> lstAdminCallback;
     GestionNotificaciones objReferenciaRemota;
@@ -349,8 +349,8 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
         bandera = paciente.add(objPacientes);
 
         System.out.println("Paciente Registrado... ");
-         for (AdminCllbckint objUsuario : lstAdminCallback) {
-           objUsuario.notificar(objPacientes.nombreCompleto, objPacientes.id);
+        for (AdminCllbckint objUsuario : lstAdminCallback) {
+            objUsuario.notificar(objPacientes.nombreCompleto, objPacientes.id);
         }
         return bandera;
     }
@@ -381,28 +381,22 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
 
     @Override
     public boolean existevaloracion(int id, String ocupacion) {
-        System.out.println("tamanio: " + valorarPaciente.size());
-        int valor = -1;
-        if (valorarPaciente.size() == 0) {
-            return false;
-        } else {
-            for (int i = 0; i < valorarPaciente.size(); i++) {
-                if ((valorarPaciente.get(i).idPaciente).equals(id) && valorarPaciente.get(i).Profesion.equals(ocupacion)) {
-                    valor = i;
-                }
+        System.out.println("En existeValoracion");
+        int cont = 0;
+        for (int i = 0; i < valorarPaciente.size(); i++) {
+            if(valorarPaciente.get(i).idPaciente.equals(id+"")){
+                if(valorarPaciente.get(i).Profesion.equals(ocupacion))
+                    cont++;
             }
-            if (valor == -1) {
-                return true;
-            } else {
-                return false;
-            }
-
         }
+        if(cont== 1){
+            return true;
+        }else
+            return false;
+}
 
-    }
-
-    @Override
-    public boolean validarEstadoPaciente(String id) {
+@Override
+        public boolean validarEstadoPaciente(String id) {
         boolean estadoMedico = false, estadoPsicologa = false;
         int valor = 0;
         for (int i = 0; i < valorarPaciente.size(); i++) {
@@ -426,7 +420,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-    public boolean existenciaspersonal() {
+        public boolean existenciaspersonal() {
         if(paciente.size() == 0){
             return false;
         }
@@ -434,7 +428,7 @@ public class GestionPersonalImpl implements GestionPersonalOperations {
     }
 
     @Override
-    public boolean validaTodoVal(int id) {
+        public boolean validaTodoVal(int id) {
         boolean medico = false, fisio = false, psico = false;
        for(int i = 0; i< valorarPaciente.size(); i++){
            if (valorarPaciente.get(i).idPaciente.equals(id+"") ) {

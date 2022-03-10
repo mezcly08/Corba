@@ -284,9 +284,7 @@ public class GUIMenuMedico extends javax.swing.JFrame {
 
     private void btnSesionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSesionesMouseClicked
         String idPaciente = JOptionPane.showInputDialog("Ingrese el id del paciente");
-
         boolean bandera = false;
-
         try {
             if (idPaciente != null && idPaciente.length() > 0) {
                 if (ref.validaTodoVal(Integer.parseInt(idPaciente))) {
@@ -306,7 +304,6 @@ public class GUIMenuMedico extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(null, "El paciente no se encuentra valorado");
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null, "No pueden haber campos vacios.");
             }
