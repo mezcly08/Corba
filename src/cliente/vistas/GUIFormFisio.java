@@ -231,36 +231,37 @@ public class GUIFormFisio extends javax.swing.JPanel {
                     if (ref.existeSesion(id)) {
                         objInfo = ref.consultarInfoSesion(Integer.parseInt(jTextIdentificacion.getText()));
                         if (objInfo.numSesion == 12) {
-                                JOptionPane.showMessageDialog(null, "Acabamos la fase ");
-                                ref.eliminarList(id);
-                            }
+                            JOptionPane.showMessageDialog(null, "Acabamos la fase ");
+                            //ref.eliminarList(id);
+                        }
                     }
+
                     if (ref.validaTodoVal(id)) {
                         PacienteDTO objPacienteReg = ref.consultarPaciente(Integer.parseInt(jTextIdentificacion.getText()));
                         if (objPacienteReg != null) {
-                                if (objInfo == null) {
-                                    numerofase++;
-                                    numerosesion = numerosesion + 1;
-                                }else {
-                                    numerofase = objInfo.numFase+2;
-                                    numerosesion = objInfo.numSesion + 1;
-                                }
-                                InfoSesionDTO objInfoSesion = new InfoSesionDTO(Integer.parseInt(jTextIdentificacion.getText()),
-                                        numerofase, jFechaSesion.getDate().toString(),
-                                        numerosesion, Integer.parseInt(jTextPresionArterial.getText()),
-                                        Integer.parseInt(jTextFrecuenciaInicial.getText()), Integer.parseInt(jTextFrecuenciaFinal.getText()),
-                                        Integer.parseInt(jTextSaturacion.getText()), cbxEstadoPaciente.getSelectedItem().toString(), jTextObservaciones.getText());
-                                valor = ref.guardarInfoSesion(objInfoSesion);
-                                jtNumFase.setText(numerofase + "");
-                                jtNumSesion.setText(numerosesion + "");
+                            if (objInfo == null) {
+                                numerofase++;
+                                numerosesion = numerosesion + 1;
+                            } else {
+                                numerofase = objInfo.numFase;
+                                numerosesion = objInfo.numSesion + 1;
+                            }
+                            InfoSesionDTO objInfoSesion = new InfoSesionDTO(Integer.parseInt(jTextIdentificacion.getText()),
+                                    numerofase, jFechaSesion.getDate().toString(),
+                                    numerosesion, Integer.parseInt(jTextPresionArterial.getText()),
+                                    Integer.parseInt(jTextFrecuenciaInicial.getText()), Integer.parseInt(jTextFrecuenciaFinal.getText()),
+                                    Integer.parseInt(jTextSaturacion.getText()), cbxEstadoPaciente.getSelectedItem().toString(), jTextObservaciones.getText());
+                            valor = ref.guardarInfoSesion(objInfoSesion);
+                            jtNumFase.setText(numerofase + "");
+                            jtNumSesion.setText(numerosesion + "");
 
-                                if (valor) {
-                                    JOptionPane.showMessageDialog(null, "Información del paciente registrada!!");
-                                    LimpiarCampos();
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "No se pudo registrar la información");
-                                }
-                            
+                            if (valor) {
+                                JOptionPane.showMessageDialog(null, "Información del paciente registrada!!");
+                                LimpiarCampos();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "No se pudo registrar la información");
+                            }
+
                         } else {
                             JOptionPane.showMessageDialog(null, "El id " + objPacienteReg.id + " Ya se encuentra en uso");
 
@@ -275,6 +276,7 @@ public class GUIFormFisio extends javax.swing.JPanel {
             }
         } else {
             JOptionPane.showMessageDialog(null, "No pueden haber campos vacios!");
+
         }
     }//GEN-LAST:event_btnRegistrarFRCP3MouseClicked
 
